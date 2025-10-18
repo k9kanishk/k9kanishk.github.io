@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kanishk — Quant Finance Portfolio</title>
+  <meta name="description" content="Projects and publications in quantitative finance, data science, and algorithmic trading." />
+  <meta name="author" content="Kanishk" />
+  <meta property="og:title" content="Kanishk — Quant Finance Portfolio" />
+  <meta property="og:description" content="Projects and publications in quantitative finance, data science, and algorithmic trading." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f7ff', 100: '#daeefe', 200: '#bfe0fe', 300: '#93c9fd', 400: '#63a9fb', 500: '#3e86f6', 600: '#2f69e9', 700: '#2a56c7', 800: '#2447a1', 900: '#1e397f'
+            }
+          }
+        }
+      },
+      darkMode: 'media'
+    }
+  </script>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>📈</text></svg>">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Kanishk",
+    "url": "https://k9kanishk.github.io",
+    "jobTitle": "Quantitative Researcher",
+    "sameAs": [
+      "https://www.linkedin.com/in/your-handle",
+      "https://github.com/k9kanishk"
+    ]
+  }
+  </script>
+
+  <style>
+    .bg-grid {
+      background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+      background-position: -1px -1px;
+    }
+    .prose a { text-decoration: underline; }
+  </style>
+</head>
+<body class="min-h-screen text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-900">
+  <header class="sticky top-0 z-50 backdrop-blur bg-white/70 dark:bg-slate-900/60 border-b border-black/5 dark:border-white/5">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="#top" class="font-semibold tracking-tight text-slate-800 dark:text-slate-100">Kanishk</a>
+      <nav class="flex gap-4 text-sm">
+        <a href="#projects" class="hover:text-brand-600">Projects</a>
+        <a href="#skills" class="hover:text-brand-600">Skills</a>
+        <a href="#publications" class="hover:text-brand-600">Publications</a>
+        <a href="#resume" class="hover:text-brand-600">Resume</a>
+        <a href="#contact" class="hover:text-brand-600">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="top" class="bg-grid">
+    <div class="max-w-6xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
+          Quantitative Finance Portfolio
+        </h1>
+        <p class="mt-4 text-lg text-slate-600 dark:text-slate-300">
+          I'm <span class="font-semibold">Kanishk</span>, building models at the intersection of markets, statistics, and software. Here's a curated selection of my work.
+        </p>
+        <div class="mt-6 flex gap-3">
+          <a href="#projects" class="px-4 py-2 rounded-xl bg-brand-600 text-white hover:bg-brand-700 transition">See projects</a>
+          <a href="#contact" class="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 transition">Contact</a>
+        </div>
+        <div class="mt-6 flex items-center gap-4 text-sm">
+          <a class="hover:underline" href="https://github.com/k9kanishk" target="_blank" rel="noopener">GitHub</a>
+          <a class="hover:underline" href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="hover:underline" href="https://your-blog.com" target="_blank" rel="noopener">Blog</a>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="aspect-[4/3] rounded-2xl border border-black/5 dark:border-white/10 p-6">
+          <canvas id="spark" class="w-full h-full"></canvas>
+        </div>
+        <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Synthetic price path generated on load (GBM).</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl font-bold">Core skills</h2>
+      <div class="mt-6 grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="p-4 rounded-2xl border border-black/5 dark:border-white/10">
+          <h3 class="font-semibold">Markets & Microstructure</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Limit order books, execution, slippage, transaction costs.</p>
+        </div>
+        <div class="p-4 rounded-2xl border border-black/5 dark:border-white/10">
+          <h3 class="font-semibold">Statistics & ML</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Time series, regime detection, feature engineering, cross‑validation.</p>
+        </div>
+        <div class="p-4 rounded-2xl border border-black/5 dark:border-white/10">
+          <h3 class="font-semibold">Derivatives & Risk</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Option pricing, Greeks, VaR/ES, backtesting, stress testing.</p>
+        </div>
+        <div class="p-4 rounded-2xl border border-black/5 dark:border-white/10">
+          <h3 class="font-semibold">Software Engineering</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">Python, C++ basics, NumPy/Pandas, vectorization, CI/CD.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="py-16 bg-slate-50/60 dark:bg-slate-800/40">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="flex items-end justify-between gap-4">
+        <h2 class="text-2xl font-bold">Projects</h2>
+        <div class="flex gap-2">
+          <input id="search" type="search" placeholder="Filter projects…" class="px-3 py-2 rounded-xl text-sm bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700">
+          <select id="tagFilter" class="px-3 py-2 rounded-xl text-sm bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700">
+            <option value="">All tags</option>
+          </select>
+        </div>
+      </div>
+      <div id="projectGrid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </div>
+  </section>
+
+  <section id="publications" class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl font-bold">Publications & writing</h2>
+      <ul id="pubList" class="mt-4 space-y-3"></ul>
+    </div>
+  </section>
+
+  <section id="resume" class="py-16 bg-slate-50/60 dark:bg-slate-800/40">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl font-bold">Resume</h2>
+      <p class="mt-2 text-slate-600 dark:text-slate-300">One‑page resume tailored for quant roles. PDF preferred.</p>
+      <a href="/Kanishk_Resume.pdf" class="inline-block mt-4 px-4 py-2 rounded-xl bg-brand-600 text-white hover:bg-brand-700">Download PDF</a>
+    </div>
+  </section>
+
+  <section id="contact" class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl font-bold">Contact</h2>
+      <p class="mt-2 text-slate-600 dark:text-slate-300">Open to internships and full‑time roles in quantitative research, trading, or engineering.</p>
+      <div class="mt-4 grid sm:grid-cols-2 gap-4">
+        <a href="mailto:you@domain.com" class="p-4 rounded-2xl border border-black/5 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-slate-800">you@domain.com</a>
+        <a href="https://www.linkedin.com/in/your-handle" target="_blank" rel="noopener" class="p-4 rounded-2xl border border-black/5 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-slate-800">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="py-10 border-t border-black/5 dark:border-white/10">
+    <div class="max-w-6xl mx-auto px-4 text-sm text-slate-500 dark:text-slate-400">
+      <p>© <span id="year"></span> Kanishk. Built with HTML + Tailwind. View source on <a class="underline" href="https://github.com/k9kanishk/quant-portfolio" target="_blank" rel="noopener">GitHub</a>.</p>
+    </div>
+  </footer>
+
+  <script>
+    const projects = [
+      {
+        title: 'Mean Reversion on Futures Spreads',
+        summary: 'Pairs & spreads with z‑score signals, transaction costs, and walk‑forward validation.',
+        tags: ['Alpha', 'Time Series', 'Backtest'],
+        links: {
+          code: 'https://github.com/k9kanishk/mean-reversion-spreads',
+          paper: '',
+          demo: ''
+        }
+      },
+      {
+        title: 'Options Vol Surface Interpolator',
+        summary: 'SABR/SSVI calibration with arbitrage constraints and fast Greeks.',
+        tags: ['Derivatives', 'Volatility', 'Numerics'],
+        links: {
+          code: 'https://github.com/k9kanishk/vol-surface',
+          paper: '',
+          demo: ''
+        }
+      },
+      {
+        title: 'LOB Simulator & Execution',
+        summary: 'Discrete‑event LOB sim with Almgren–Chriss style execution and slippage modeling.',
+        tags: ['Microstructure', 'Execution', 'C++'],
+        links: {
+          code: 'https://github.com/k9kanishk/lob-sim',
+          paper: '',
+          demo: ''
+        }
+      }
+    ];
+
+    const allTags = Array.from(new Set(projects.flatMap(p => p.tags))).sort();
+    const tagFilter = document.getElementById('tagFilter');
+    allTags.forEach(t => {
+      const opt = document.createElement('option');
+      opt.value = t; opt.textContent = t; tagFilter.appendChild(opt);
+    });
+
+    const grid = document.getElementById('projectGrid');
+    const search = document.getElementById('search');
+
+    function render() {
+      const q = (search.value || '').toLowerCase();
+      const tag = tagFilter.value;
+      grid.innerHTML = '';
+      projects
+        .filter(p => !q || p.title.toLowerCase().includes(q) || p.summary.toLowerCase().includes(q) || p.tags.some(t => t.toLowerCase().includes(q)))
+        .filter(p => !tag || p.tags.includes(tag))
+        .forEach(p => {
+          const card = document.createElement('article');
+          card.className = 'p-5 rounded-2xl border border-black/5 dark:border-white/10 bg-white/80 dark:bg-slate-900/50 backdrop-blur';
+          card.innerHTML = `
+            <h3 class="font-semibold">${p.title}</h3>
+            <p class="mt-2 text-sm text-slate-600 dark:text-slate-300">${p.summary}</p>
+            <div class="mt-3 flex flex-wrap gap-2">${p.tags.map(t => `<span class='px-2 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs'>${t}</span>`).join('')}</div>
+            <div class="mt-4 flex flex-wrap gap-3 text-sm">
+              ${p.links.code ? `<a class='underline' target='_blank' rel='noopener' href='${p.links.code}'>Code</a>` : ''}
+              ${p.links.paper ? `<a class='underline' target='_blank' rel='noopener' href='${p.links.paper}'>Paper</a>` : ''}
+              ${p.links.demo ? `<a class='underline' target='_blank' rel='noopener' href='${p.links.demo}'>Demo</a>` : ''}
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+    }
+
+    search && search.addEventListener('input', render);
+    tagFilter.addEventListener('change', render);
+    render();
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function drawGBM(canvas) {
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width = canvas.clientWidth * window.devicePixelRatio;
+      const h = canvas.height = canvas.clientHeight * window.devicePixelRatio;
+      ctx.clearRect(0,0,w,h);
+      const n = 240, mu = 0.10, sigma = 0.25, dt = 1/n;
+      let s = 1.0; const path = [s];
+      for (let i=1; i<n; i++) {
+        const z = Math.sqrt(-2*Math.log(Math.random())) * Math.cos(2*Math.PI*Math.random());
+        s = s * Math.exp((mu - 0.5*sigma*sigma)*dt + sigma*Math.sqrt(dt)*z);
+        path.push(s);
+      }
+      const min = Math.min(...path), max = Math.max(...path);
+      ctx.beginPath();
+      path.forEach((v, i) => {
+        const x = i / (n-1) * (w - 20) + 10;
+        const y = h - ((v - min) / (max - min + 1e-9)) * (h - 20) - 10;
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      });
+      ctx.lineWidth = 3; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+      ctx.strokeStyle = '#3e86f6';
+      ctx.stroke();
+    }
+    const canvas = document.getElementById('spark');
+    const resize = () => drawGBM(canvas);
+    window.addEventListener('resize', resize);
+    resize();
+  </script>
+</body>
+</html>
