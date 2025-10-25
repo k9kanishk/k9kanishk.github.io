@@ -138,35 +138,16 @@
   <script>
     const projects = [
       {
-        title: 'Mean Reversion on Futures Spreads',
-        summary: 'Pairs & spreads with z‑score signals, transaction costs, and walk‑forward validation.',
-        tags: ['Alpha', 'Time Series', 'Backtest'],
-        links: {
-          code: 'https://github.com/k9kanishk/mean-reversion-spreads',
-          paper: '',
-          demo: ''
-        }
-      },
-      {
-        title: 'Options Vol Surface Interpolator',
-        summary: 'SABR/SSVI calibration with arbitrage constraints and fast Greeks.',
-        tags: ['Derivatives', 'Volatility', 'Numerics'],
-        links: {
-          code: 'https://github.com/k9kanishk/vol-surface',
-          paper: '',
-          demo: ''
-        }
-      },
-      {
-        title: 'LOB Simulator & Execution',
-        summary: 'Discrete‑event LOB sim with Almgren–Chriss style execution and slippage modeling.',
-        tags: ['Microstructure', 'Execution', 'C++'],
-        links: {
-          code: 'https://github.com/k9kanishk/lob-sim',
-          paper: '',
-          demo: ''
-        }
-      }
+    title: 'Enterprise XVA Engine',
+    summary: 'Interactive CVA/FVA/MVA/KVA demo with Greeks and scenario shocks. Monte-Carlo engine, flat-curve funding proxy, JSON import/export.',
+    tags: ['Risk', 'XVA', 'Credit', 'Monte Carlo', 'Greeks', 'React', 'TypeScript'],
+    links: {
+      code: 'https://github.com/k9kanishk/xva-demo',
+      paper: '',
+      demo: 'https://k9kanishk.github.io/xva-demo/'
+    }
+  }
+      
     ];
 
     const allTags = Array.from(new Set(projects.flatMap(p => p.tags))).sort();
