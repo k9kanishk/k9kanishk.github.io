@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en" class="dark scroll-smooth">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,25 +46,47 @@
   </script>
 
   <style>
-    /* Grid background tuned for dark theme */
+    :root { color-scheme: dark; }
+
+    /* Subtle grid background */
     .bg-grid {
       position: relative;
-      background-image: linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
       background-size: 24px 24px;
       background-position: -1px -1px;
     }
-    .prose a { text-decoration: underline; }
+
+    /* Background glow */
+    .glow {
+      background:
+        radial-gradient(700px circle at 20% 20%, rgba(62,134,246,.25), transparent 45%),
+        radial-gradient(700px circle at 80% 10%, rgba(99,169,251,.16), transparent 48%),
+        radial-gradient(700px circle at 70% 80%, rgba(47,105,233,.10), transparent 50%);
+      filter: saturate(110%);
+    }
+
+    /* Nicer focus */
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+      outline: 2px solid rgba(99,169,251,0.8);
+      outline-offset: 2px;
+      border-radius: 12px;
+    }
   </style>
 </head>
-<body class="min-h-screen text-slate-100 bg-slate-900">
+
+<body class="min-h-screen text-slate-100 bg-slate-950 relative overflow-x-hidden">
+  <div class="glow absolute inset-0 -z-10"></div>
+
   <!-- Header / Nav -->
-  <header class="sticky top-0 z-50 backdrop-blur bg-slate-900/70 border-b border-white/5">
+  <header class="sticky top-0 z-50 backdrop-blur bg-slate-950/70 border-b border-white/5">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="#top" class="font-semibold tracking-tight">Kanishk</a>
-      <nav class="flex gap-4 text-sm">
-        <a href="#projects" class="hover:text-brand-300">Projects</a>
-        <a href="#contact" class="hover:text-brand-300">Contact</a>
+      <a href="#top" class="font-semibold tracking-tight hover:text-brand-300 transition">
+        Kanishk
+      </a>
+      <nav class="flex gap-2 text-sm">
+        <a href="#projects" class="px-3 py-1.5 rounded-xl hover:bg-white/5 hover:text-brand-300 transition">Projects</a>
+        <a href="#contact" class="px-3 py-1.5 rounded-xl hover:bg-white/5 hover:text-brand-300 transition">Contact</a>
       </nav>
     </div>
   </header>
@@ -73,64 +95,102 @@
   <section id="top" class="bg-grid">
     <div class="max-w-6xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-10 items-center">
       <div>
-        <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs text-slate-200">
+          <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
+          Quant Finance • Risk • Energy Markets
+        </div>
+
+        <h1 class="mt-5 text-4xl md:text-5xl font-extrabold leading-tight">
           Quantitative Finance Portfolio
         </h1>
+
         <p class="mt-4 text-lg text-slate-300">
-          I’m <span class="font-semibold">Kanishk Sharma</span> - this page showcases the projects I’ve built across quant finance.
+          I’m <span class="font-semibold text-slate-100">Kanishk Sharma</span>.
+          I build risk engines, pricing models, and research dashboards you can actually run.
         </p>
-        <div class="mt-6 flex gap-3">
-          <a href="#projects" class="px-4 py-2 rounded-xl bg-brand-600 text-white hover:bg-brand-700 transition">See projects</a>
-          <a href="#contact" class="px-4 py-2 rounded-xl border border-slate-700 hover:bg-slate-800 transition">Contact</a>
+
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="#projects" class="px-5 py-2.5 rounded-2xl bg-brand-600 text-white hover:bg-brand-700 transition shadow-lg shadow-brand-900/30">
+            See projects
+          </a>
+          <a href="#contact" class="px-5 py-2.5 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
+            Contact
+          </a>
         </div>
-        <div class="mt-6 flex items-center gap-4 text-sm">
-          <a class="hover:underline" href="https://github.com/k9kanishk" target="_blank" rel="noopener">GitHub</a>
-          <a class="hover:underline" href="https://www.linkedin.com/in/kanishk99/" target="_blank" rel="noopener">LinkedIn</a>
+
+        <div class="mt-6 flex items-center gap-4 text-sm text-slate-300">
+          <a class="hover:text-brand-300 transition" href="https://github.com/k9kanishk" target="_blank" rel="noopener">GitHub</a>
+          <span class="text-white/20">•</span>
+          <a class="hover:text-brand-300 transition" href="https://www.linkedin.com/in/kanishk99/" target="_blank" rel="noopener">LinkedIn</a>
         </div>
       </div>
+
       <div class="relative">
-        <div class="aspect-[4/3] rounded-2xl border border-white/10 p-6">
-          <canvas id="spark" class="w-full h-full"></canvas>
+        <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-xl shadow-black/30">
+          <div class="flex items-center justify-between mb-3">
+            <p class="text-sm font-semibold">Synthetic price path</p>
+            <span class="text-xs text-slate-400">GBM</span>
+          </div>
+          <div class="aspect-[4/3] rounded-xl border border-white/10 bg-slate-950/40 p-2">
+            <canvas id="spark" class="w-full h-full"></canvas>
+          </div>
         </div>
-        <p class="text-xs text-slate-400 mt-2">Synthetic price path generated on load (GBM).</p>
+        <p class="text-xs text-slate-400 mt-2">Generated on load (for vibes, not signals).</p>
       </div>
     </div>
   </section>
 
   <!-- Projects -->
-  <section id="projects" class="py-16 bg-slate-800/40">
+  <section id="projects" class="py-16">
     <div class="max-w-6xl mx-auto px-4">
-      <div class="flex items-end justify-between gap-4">
-        <h2 class="text-2xl font-bold">Projects</h2>
-        <div class="flex gap-2">
-          <input id="search" type="search" placeholder="Filter projects…" class="px-3 py-2 rounded-xl text-sm bg-slate-900 border border-slate-700">
-          <select id="tagFilter" class="px-3 py-2 rounded-xl text-sm bg-slate-900 border border-slate-700">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-bold">Projects</h2>
+          <p class="mt-1 text-sm text-slate-300">Filter by keyword or tag. Click Code/Demo to view.</p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-2">
+          <input id="search" type="search" placeholder="Filter projects…" class="px-3 py-2 rounded-xl text-sm bg-slate-950/60 border border-white/10 focus:border-brand-400/60">
+          <select id="tagFilter" class="px-3 py-2 rounded-xl text-sm bg-slate-950/60 border border-white/10 focus:border-brand-400/60">
             <option value="">All tags</option>
           </select>
         </div>
       </div>
+
       <div id="projectGrid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+
+      <div id="emptyState" class="hidden mt-8 p-6 rounded-2xl border border-white/10 bg-white/5 text-slate-300">
+        No projects match your filters.
+      </div>
     </div>
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="py-16">
+  <section id="contact" class="py-16 border-t border-white/5">
     <div class="max-w-6xl mx-auto px-4">
       <h2 class="text-2xl font-bold">Contact</h2>
       <p class="mt-2 text-slate-300">
-        Open to internships and full‑time roles in quantitative finance, market risk and credit risk.
+        Open to internships and full-time roles in quantitative finance, market risk, credit risk, and energy analytics.
       </p>
-      <div class="mt-4 grid sm:grid-cols-2 gap-4">
-        <a href="mailto:K99kanishk@gmail.com" class="p-4 rounded-2xl border border-white/10 hover:bg-slate-800">K99kanishk@gmail.com</a>
-        <a href="https://www.linkedin.com/in/kanishk99/" target="_blank" rel="noopener" class="p-4 rounded-2xl border border-white/10 hover:bg-slate-800">LinkedIn</a>
+
+      <div class="mt-5 grid sm:grid-cols-2 gap-4">
+        <a href="mailto:K99kanishk@gmail.com" class="p-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
+          <div class="text-sm text-slate-300">Email</div>
+          <div class="font-semibold">K99kanishk@gmail.com</div>
+        </a>
+        <a href="https://www.linkedin.com/in/kanishk99/" target="_blank" rel="noopener" class="p-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
+          <div class="text-sm text-slate-300">LinkedIn</div>
+          <div class="font-semibold">/in/kanishk99</div>
+        </a>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
   <footer class="py-10 border-t border-white/10">
-    <div class="max-w-6xl mx-auto px-4 text-sm text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 text-sm text-slate-400 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
       <p>© <span id="year"></span> Kanishk. Built with HTML + Tailwind.</p>
+      <p class="text-slate-500">Last updated: <span id="lastUpdated"></span></p>
     </div>
   </footer>
 
@@ -138,51 +198,58 @@
   <script>
     const projects = [
       {
-    title: 'Enterprise XVA Engine',
-    summary: 'Interactive CVA/FVA/MVA/KVA demo with Greeks and scenario shocks. Monte-Carlo engine, flat-curve funding proxy, JSON import/export.',
-    tags: ['Risk', 'XVA', 'Credit', 'Monte Carlo', 'Greeks', 'React', 'TypeScript'],
-    links: {
-      code: 'https://github.com/k9kanishk/xva-demo',
-      paper: '',
-      demo: 'https://k9kanishk.github.io/xva-demo/'
-    }
-  },
-       {
-    title: 'Basel III Endgame (FRTB-SA) Risk App',
-    summary:
-      'Next.js app that estimates pre/post-Endgame RWA using the FRTB-SA SBM engine. ' +
-      'Multi-risk-class (Rates/FX/Equity), desk hot-spots, instrument-level audit trail, and GitHub Pages deployment.',
-    tags: ['Risk', 'Market Risk', 'FRTB', 'Basel', 'RWA', 'Next.js', 'React', 'TypeScript', 'Tailwind'],
-    links: {
-      code: 'https://github.com/k9kanishk/basel-endgame-frtb',
-      paper: '',
-      demo: 'https://k9kanishk.github.io/basel-endgame-frtb/'
-      
-    }
-  },
-       {
-    title: 'Irish Day-Ahead Power Price Forecast',
-    summary:
-      'Streamlit dashboard that forecasts Irish SEMOpx day-ahead prices using SEMOpx lookback data, ENTSO-E load/wind/solar fundamentals, weather features, and an XGBoost model with 7-day backtest metrics.',
-    tags: ['Energy', 'Time Series', 'Forecasting', 'XGBoost', 'Streamlit', 'Python', 'SEMOpx', 'ENTSO-E'],
-    links: {
-      code: 'https://github.com/k9kanishk/irish-dam-forecast/tree/new2',
-      paper: '',
-      demo: 'https://zqqdj8exuksfkruaw9ds2n.streamlit.app/' 
+        title: 'Enterprise XVA Engine',
+        summary: 'Interactive CVA/FVA/MVA/KVA demo with Greeks and scenario shocks. Monte-Carlo engine, flat-curve funding proxy, JSON import/export.',
+        tags: ['Risk', 'XVA', 'Credit', 'Monte Carlo', 'Greeks', 'React', 'TypeScript'],
+        links: {
+          code: 'https://github.com/k9kanishk/xva-demo',
+          paper: '',
+          demo: 'https://k9kanishk.github.io/xva-demo/'
+        }
+      },
+      {
+        title: 'Basel III Endgame (FRTB-SA) Risk App',
+        summary: 'Next.js app that estimates pre/post-Endgame RWA using the FRTB-SA SBM engine. Multi-risk-class (Rates/FX/Equity), desk hot-spots, instrument-level audit trail.',
+        tags: ['Risk', 'Market Risk', 'FRTB', 'Basel', 'RWA', 'Next.js', 'React', 'TypeScript', 'Tailwind'],
+        links: {
+          code: 'https://github.com/k9kanishk/basel-endgame-frtb',
+          paper: '',
+          demo: 'https://k9kanishk.github.io/basel-endgame-frtb/'
+        }
+      },
+      {
+        title: 'Irish Day-Ahead Power Price Forecast',
+        summary: 'Streamlit dashboard forecasting Irish SEMOpx day-ahead prices using lookback data + ENTSO-E fundamentals + weather features. XGBoost with backtest metrics.',
+        tags: ['Energy', 'Time Series', 'Forecasting', 'XGBoost', 'Streamlit', 'Python', 'SEMOpx', 'ENTSO-E'],
+        links: {
+          code: 'https://github.com/k9kanishk/irish-dam-forecast/tree/new2',
+          paper: '',
+          demo: 'https://zqqdj8exuksfkruaw9ds2n.streamlit.app/'
+        }
+      },
+      {
+        title: 'Global ETF Cross-Market Arbitrage Explorer',
+        summary: 'Streamlit research dashboard pulling live ETF data, normalizing US/EU listings via FX, computing rolling z-scores, and backtesting mean-reversion trades with costs.',
+        tags: ['ETFs', 'Arbitrage', 'Quant', 'Time Series', 'FX', 'Streamlit', 'Python'],
+        links: {
+          code: 'https://github.com/k9kanishk/etf-crossmarket-arb',
+          paper: '',
+          demo: 'https://83wzpsnlczxxqk4deeceo2.streamlit.app/'
+        }
+      },
+
+      /* ✅ NEW PROJECT: Energy Tariff Pricing Engine */
+      {
+        title: 'ROI/NI Energy Tariff Pricing Engine',
+        summary: 'All-in electricity/gas tariff builder for ROI + NI: wholesale curve inputs, shaping/losses, pass-through charge library, margin/risk adders, sanity bounds, and Streamlit tender output.',
+        tags: ['Energy', 'Pricing', 'Tariffs', 'Risk', 'Streamlit', 'Python', 'ROI', 'NI'],
+        links: {
+          code: 'https://github.com/k9kanishk/energy-tariff-pricing-engine',
+          paper: '',
+          demo: 'https://energy-tariff-pricing-engine-dhq6xndappucbuy8ev7sg5p.streamlit.app/' // add your Streamlit URL if deployed
+        }
       }
-    },
-    {
-      title: 'Global ETF Cross-Market Arbitrage Explorer',
-      summary:
-        'Streamlit research dashboard that pulls live ETF data from Yahoo Finance, normalizes US/EU listings via FX, computes rolling z-scores, and backtests mean-reversion trades with costs, borrow, and latency.',
-      tags: ['ETFs', 'Arbitrage', 'Quant', 'Time Series', 'FX', 'Streamlit', 'Python'],
-      links: {
-        code: 'https://github.com/k9kanishk/etf-crossmarket-arb',
-        paper: '',
-        demo: 'https://83wzpsnlczxxqk4deeceo2.streamlit.app/' // update if your app URL is different
-      }
-    }
-  ];
+    ];
 
     const allTags = Array.from(new Set(projects.flatMap(p => p.tags))).sort();
     const tagFilter = document.getElementById('tagFilter');
@@ -192,30 +259,78 @@
     });
 
     const grid = document.getElementById('projectGrid');
+    const emptyState = document.getElementById('emptyState');
     const search = document.getElementById('search');
+
+    function pill(text) {
+      return `<span class="px-2 py-1 rounded-lg bg-slate-950/40 border border-white/10 text-xs text-slate-200">${text}</span>`;
+    }
+
+    function actionButton(label, href) {
+      return `
+        <a class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 transition"
+           target="_blank" rel="noopener" href="${href}">
+          ${label}
+          <span class="text-white/30">↗</span>
+        </a>
+      `;
+    }
 
     function render() {
       const q = (search?.value || '').toLowerCase();
       const tag = tagFilter.value;
+
+      const filtered = projects
+        .filter(p =>
+          !q ||
+          p.title.toLowerCase().includes(q) ||
+          p.summary.toLowerCase().includes(q) ||
+          p.tags.some(t => t.toLowerCase().includes(q))
+        )
+        .filter(p => !tag || p.tags.includes(tag));
+
       grid.innerHTML = '';
-      projects
-        .filter(p => !q || p.title.toLowerCase().includes(q) || p.summary.toLowerCase().includes(q) || p.tags.some(t => t.toLowerCase().includes(q)))
-        .filter(p => !tag || p.tags.includes(tag))
-        .forEach(p => {
-          const card = document.createElement('article');
-          card.className = 'p-5 rounded-2xl border border-white/10 bg-slate-900/60 backdrop-blur';
-          card.innerHTML = `
-            <h3 class="font-semibold">${p.title}</h3>
-            <p class="mt-2 text-sm text-slate-300">${p.summary}</p>
-            <div class="mt-3 flex flex-wrap gap-2">${p.tags.map(t => `<span class='px-2 py-1 rounded-lg bg-slate-800 text-xs'>${t}</span>`).join('')}</div>
-            <div class="mt-4 flex flex-wrap gap-3 text-sm">
-              ${p.links.code ? `<a class='underline' target='_blank' rel='noopener' href='${p.links.code}'>Code</a>` : ''}
-              ${p.links.paper ? `<a class='underline' target='_blank' rel='noopener' href='${p.links.paper}'>Paper</a>` : ''}
-              ${p.links.demo ? `<a class='underline' target='_blank' rel='noopener' href='${p.links.demo}'>Demo</a>` : ''}
-            </div>
-          `;
-          grid.appendChild(card);
-        });
+
+      if (!filtered.length) {
+        emptyState.classList.remove('hidden');
+        return;
+      } else {
+        emptyState.classList.add('hidden');
+      }
+
+      filtered.forEach(p => {
+        const card = document.createElement('article');
+        card.className =
+          'group p-5 rounded-2xl border border-white/10 bg-white/5 backdrop-blur shadow-xl shadow-black/20 ' +
+          'transition transform hover:-translate-y-0.5 hover:border-white/20';
+
+        const actions = [
+          p.links.code ? actionButton('Code', p.links.code) : '',
+          p.links.paper ? actionButton('Paper', p.links.paper) : '',
+          p.links.demo ? actionButton('Demo', p.links.demo) : ''
+        ].filter(Boolean).join('');
+
+        card.innerHTML = `
+          <div class="flex items-start justify-between gap-3">
+            <h3 class="font-semibold text-slate-100">${p.title}</h3>
+            <span class="text-xs px-2 py-1 rounded-lg border border-brand-400/30 text-brand-200 bg-brand-900/20">
+              Project
+            </span>
+          </div>
+
+          <p class="mt-2 text-sm text-slate-300 leading-relaxed">${p.summary}</p>
+
+          <div class="mt-3 flex flex-wrap gap-2">
+            ${p.tags.map(pill).join('')}
+          </div>
+
+          <div class="mt-4 flex flex-wrap gap-2">
+            ${actions || `<span class="text-sm text-slate-400">No links yet</span>`}
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
     }
 
     search && search.addEventListener('input', render);
@@ -223,30 +338,58 @@
     render();
 
     document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString(undefined, { year:'numeric', month:'short', day:'2-digit' });
 
     function drawGBM(canvas) {
       const ctx = canvas.getContext('2d');
-      const w = canvas.width = canvas.clientWidth * window.devicePixelRatio;
-      const h = canvas.height = canvas.clientHeight * window.devicePixelRatio;
-      ctx.clearRect(0,0,w,h);
-      const n = 240, mu = 0.10, sigma = 0.25, dt = 1/n;
-      let s = 1.0; const path = [s];
-      for (let i=1; i<n; i++) {
-        const z = Math.sqrt(-2*Math.log(Math.random())) * Math.cos(2*Math.PI*Math.random());
-        s = s * Math.exp((mu - 0.5*sigma*sigma)*dt + sigma*Math.sqrt(dt)*z);
+      const w = canvas.width = Math.floor(canvas.clientWidth * window.devicePixelRatio);
+      const h = canvas.height = Math.floor(canvas.clientHeight * window.devicePixelRatio);
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Background grid-ish
+      ctx.globalAlpha = 0.18;
+      ctx.strokeStyle = '#ffffff';
+      ctx.lineWidth = 1;
+      for (let x = 0; x < w; x += Math.floor(40 * window.devicePixelRatio)) {
+        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+      }
+      for (let y = 0; y < h; y += Math.floor(40 * window.devicePixelRatio)) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+      }
+      ctx.globalAlpha = 1;
+
+      // GBM path
+      const n = 240, mu = 0.10, sigma = 0.25, dt = 1 / n;
+      let s = 1.0;
+      const path = [s];
+
+      for (let i = 1; i < n; i++) {
+        const z = Math.sqrt(-2 * Math.log(Math.random())) * Math.cos(2 * Math.PI * Math.random());
+        s = s * Math.exp((mu - 0.5 * sigma * sigma) * dt + sigma * Math.sqrt(dt) * z);
         path.push(s);
       }
-      const min = Math.min(...path), max = Math.max(...path);
+
+      const min = Math.min(...path);
+      const max = Math.max(...path);
+
       ctx.beginPath();
       path.forEach((v, i) => {
-        const x = i / (n-1) * (w - 20) + 10;
-        const y = h - ((v - min) / (max - min + 1e-9)) * (h - 20) - 10;
+        const x = i / (n - 1) * (w - 24) + 12;
+        const y = h - ((v - min) / (max - min + 1e-9)) * (h - 24) - 12;
         i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
       });
-      ctx.lineWidth = 3; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+
+      ctx.lineWidth = Math.max(2, Math.floor(3 * window.devicePixelRatio));
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
       ctx.strokeStyle = '#63a9fb';
+      ctx.shadowColor = 'rgba(99,169,251,0.35)';
+      ctx.shadowBlur = 12;
       ctx.stroke();
+      ctx.shadowBlur = 0;
     }
+
     const canvas = document.getElementById('spark');
     const resize = () => drawGBM(canvas);
     window.addEventListener('resize', resize);
@@ -254,4 +397,3 @@
   </script>
 </body>
 </html>
-
