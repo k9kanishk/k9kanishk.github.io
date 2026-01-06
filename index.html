@@ -198,6 +198,26 @@
   <script>
     const projects = [
       {
+        title: 'ROI/NI Energy Tariff Pricing Engine',
+        summary: 'All-in electricity/gas tariff builder for ROI + NI: wholesale curve inputs, shaping/losses, pass-through charge library, margin/risk adders, sanity bounds, and Streamlit tender output.',
+        tags: ['Energy', 'Pricing', 'Tariffs', 'Risk', 'Streamlit', 'Python', 'ROI', 'NI'],
+        links: {
+          code: 'https://github.com/k9kanishk/energy-tariff-pricing-engine',
+          paper: '',
+          demo: 'https://energy-tariff-pricing-engine-dhq6xndappucbuy8ev7sg5p.streamlit.app/' // add your Streamlit URL if deployed
+        }
+      },
+      {
+        title: 'Global ETF Cross-Market Arbitrage Explorer',
+        summary: 'Streamlit research dashboard pulling live ETF data, normalizing US/EU listings via FX, computing rolling z-scores, and backtesting mean-reversion trades with costs.',
+        tags: ['ETFs', 'Arbitrage', 'Quant', 'Time Series', 'FX', 'Streamlit', 'Python'],
+        links: {
+          code: 'https://github.com/k9kanishk/etf-crossmarket-arb',
+          paper: '',
+          demo: 'https://83wzpsnlczxxqk4deeceo2.streamlit.app/'
+        }
+      },
+      {
         title: 'Enterprise XVA Engine',
         summary: 'Interactive CVA/FVA/MVA/KVA demo with Greeks and scenario shocks. Monte-Carlo engine, flat-curve funding proxy, JSON import/export.',
         tags: ['Risk', 'XVA', 'Credit', 'Monte Carlo', 'Greeks', 'React', 'TypeScript'],
@@ -226,29 +246,8 @@
           paper: '',
           demo: 'https://zqqdj8exuksfkruaw9ds2n.streamlit.app/'
         }
-      },
-      {
-        title: 'Global ETF Cross-Market Arbitrage Explorer',
-        summary: 'Streamlit research dashboard pulling live ETF data, normalizing US/EU listings via FX, computing rolling z-scores, and backtesting mean-reversion trades with costs.',
-        tags: ['ETFs', 'Arbitrage', 'Quant', 'Time Series', 'FX', 'Streamlit', 'Python'],
-        links: {
-          code: 'https://github.com/k9kanishk/etf-crossmarket-arb',
-          paper: '',
-          demo: 'https://83wzpsnlczxxqk4deeceo2.streamlit.app/'
-        }
-      },
-
-      /* ✅ NEW PROJECT: Energy Tariff Pricing Engine */
-      {
-        title: 'ROI/NI Energy Tariff Pricing Engine',
-        summary: 'All-in electricity/gas tariff builder for ROI + NI: wholesale curve inputs, shaping/losses, pass-through charge library, margin/risk adders, sanity bounds, and Streamlit tender output.',
-        tags: ['Energy', 'Pricing', 'Tariffs', 'Risk', 'Streamlit', 'Python', 'ROI', 'NI'],
-        links: {
-          code: 'https://github.com/k9kanishk/energy-tariff-pricing-engine',
-          paper: '',
-          demo: 'https://energy-tariff-pricing-engine-dhq6xndappucbuy8ev7sg5p.streamlit.app/' // add your Streamlit URL if deployed
-        }
       }
+      
     ];
 
     const allTags = Array.from(new Set(projects.flatMap(p => p.tags))).sort();
