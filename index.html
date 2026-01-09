@@ -208,6 +208,16 @@
         }
       },
       {
+        title: 'Cross-Market Gas Spread & Netback Arbitrage (TTF–NBP–JKM)',
+        summary: 'Streamlit research dashboard analyzing TTF–NBP hub spreads and TTF–JKM LNG netbacks. Normalizes benchmarks into a common EUR/MWh basis using FX + unit conversions, fits mean-reversion (AR(1)) models, generates z-score convergence signals, and backtests spread trades with train/test and rolling walk-forward evaluation, transaction costs, and parameter sweeps.',
+        tags: ['Gas', 'Spreads', 'Arbitrage', 'Time Series', 'Streamlit', 'Python', 'Mean Reversion', 'Backtesting','FX'],
+        links: {
+          code: 'https://github.com/k9kanishk/gas-spread-arb/tree/main',
+          paper: '',
+          demo: 'https://gas-spread-arb-cm8xfqptevxytwqnutfueb.streamlit.app/' 
+        }
+      },
+      {
         title: 'Global ETF Cross-Market Arbitrage Explorer',
         summary: 'Streamlit research dashboard pulling live ETF data, normalizing US/EU listings via FX, computing rolling z-scores, and backtesting mean-reversion trades with costs.',
         tags: ['ETFs', 'Arbitrage', 'Quant', 'Time Series', 'FX', 'Streamlit', 'Python'],
