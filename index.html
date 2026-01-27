@@ -22,7 +22,22 @@
             brand: {
               50: '#f0f7ff', 100: '#daeefe', 200: '#bfe0fe', 300: '#93c9fd', 400: '#63a9fb', 500: '#3e86f6', 600: '#2f69e9', 700: '#2a56c7', 800: '#2447a1', 900: '#1e397f'
             }
-          }
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-out',
+            'slide-up': 'slideUp 0.5s ease-out',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+          },
         }
       },
       darkMode: 'class'
@@ -51,19 +66,39 @@
     /* Subtle grid background */
     .bg-grid {
       position: relative;
-      background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-      background-size: 24px 24px;
+      background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
       background-position: -1px -1px;
     }
 
-    /* Background glow */
+    /* Background glow - enhanced */
     .glow {
       background:
-        radial-gradient(700px circle at 20% 20%, rgba(62,134,246,.25), transparent 45%),
-        radial-gradient(700px circle at 80% 10%, rgba(99,169,251,.16), transparent 48%),
-        radial-gradient(700px circle at 70% 80%, rgba(47,105,233,.10), transparent 50%);
-      filter: saturate(110%);
+        radial-gradient(800px circle at 20% 20%, rgba(62,134,246,.20), transparent 45%),
+        radial-gradient(600px circle at 80% 10%, rgba(99,169,251,.12), transparent 48%),
+        radial-gradient(900px circle at 70% 80%, rgba(47,105,233,.08), transparent 50%),
+        radial-gradient(400px circle at 50% 50%, rgba(147,201,253,.05), transparent 60%);
+      filter: saturate(120%);
+    }
+
+    /* Animated gradient border */
+    .gradient-border {
+      position: relative;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+      border-radius: 1rem;
+    }
+    .gradient-border::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(99,169,251,0.3), rgba(62,134,246,0.1), rgba(47,105,233,0.3));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
     }
 
     /* Nicer focus */
@@ -72,6 +107,43 @@
       outline-offset: 2px;
       border-radius: 12px;
     }
+
+    /* Card hover effect */
+    .project-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .project-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255,255,255,0.1);
+    }
+
+    /* Featured badge animation */
+    .featured-badge {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    /* Smooth scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.05);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.15);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    /* Tag colors by category */
+    .tag-risk { background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.3); color: #fca5a5; }
+    .tag-energy { background: rgba(34, 197, 94, 0.15); border-color: rgba(34, 197, 94, 0.3); color: #86efac; }
+    .tag-quant { background: rgba(168, 85, 247, 0.15); border-color: rgba(168, 85, 247, 0.3); color: #d8b4fe; }
+    .tag-python { background: rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.3); color: #93c5fd; }
   </style>
 </head>
 
@@ -79,124 +151,228 @@
   <div class="glow absolute inset-0 -z-10"></div>
 
   <!-- Header / Nav -->
-  <header class="sticky top-0 z-50 backdrop-blur bg-slate-950/70 border-b border-white/5">
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-950/80 border-b border-white/5">
     <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="#top" class="font-semibold tracking-tight hover:text-brand-300 transition">
+      <a href="#top" class="font-semibold tracking-tight hover:text-brand-300 transition flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse-slow"></span>
         Kanishk
       </a>
-      <nav class="flex gap-2 text-sm">
-        <a href="#projects" class="px-3 py-1.5 rounded-xl hover:bg-white/5 hover:text-brand-300 transition">Projects</a>
-        <a href="#contact" class="px-3 py-1.5 rounded-xl hover:bg-white/5 hover:text-brand-300 transition">Contact</a>
+      <nav class="flex gap-1 text-sm">
+        <a href="#projects" class="px-4 py-2 rounded-xl hover:bg-white/5 hover:text-brand-300 transition">Projects</a>
+        <a href="#skills" class="px-4 py-2 rounded-xl hover:bg-white/5 hover:text-brand-300 transition">Skills</a>
+        <a href="#contact" class="px-4 py-2 rounded-xl hover:bg-white/5 hover:text-brand-300 transition">Contact</a>
       </nav>
     </div>
   </header>
 
   <!-- Hero -->
   <section id="top" class="bg-grid">
-    <div class="max-w-6xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-10 items-center">
-      <div>
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 text-xs text-slate-200">
-          <span class="w-1.5 h-1.5 rounded-full bg-brand-400"></span>
-          Quant Finance • Risk • Energy Markets
+    <div class="max-w-6xl mx-auto px-4 py-24 grid md:grid-cols-2 gap-12 items-center">
+      <div class="animate-fade-in">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-slate-200 backdrop-blur">
+          <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+          Open to opportunities
         </div>
 
-        <h1 class="mt-5 text-4xl md:text-5xl font-extrabold leading-tight">
-          Quantitative Finance Portfolio
+        <h1 class="mt-6 text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
+          Quantitative Finance
+          <span class="bg-gradient-to-r from-brand-400 to-brand-600 bg-clip-text text-transparent"> Portfolio</span>
         </h1>
 
-        <p class="mt-4 text-lg text-slate-300">
-          I’m <span class="font-semibold text-slate-100">Kanishk Sharma</span>.
+        <p class="mt-5 text-lg text-slate-300 leading-relaxed">
+          I'm <span class="font-semibold text-slate-100">Kanishk Sharma</span>.
           I build risk engines, pricing models, and research dashboards you can actually run.
         </p>
 
-        <div class="mt-7 flex flex-wrap gap-3">
-          <a href="#projects" class="px-5 py-2.5 rounded-2xl bg-brand-600 text-white hover:bg-brand-700 transition shadow-lg shadow-brand-900/30">
-            See projects
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#projects" class="px-6 py-3 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-700 text-white hover:from-brand-500 hover:to-brand-600 transition-all shadow-lg shadow-brand-900/40 font-medium">
+            View Projects
           </a>
-          <a href="#contact" class="px-5 py-2.5 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-            Contact
+          <a href="#contact" class="px-6 py-3 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 backdrop-blur transition font-medium">
+            Get in Touch
           </a>
         </div>
 
-        <div class="mt-6 flex items-center gap-4 text-sm text-slate-300">
-          <a class="hover:text-brand-300 transition" href="https://github.com/k9kanishk" target="_blank" rel="noopener">GitHub</a>
+        <div class="mt-8 flex items-center gap-5 text-sm text-slate-400">
+          <a class="hover:text-brand-300 transition flex items-center gap-2" href="https://github.com/k9kanishk" target="_blank" rel="noopener">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            GitHub
+          </a>
           <span class="text-white/20">•</span>
-          <a class="hover:text-brand-300 transition" href="https://www.linkedin.com/in/kanishk99/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="hover:text-brand-300 transition flex items-center gap-2" href="https://www.linkedin.com/in/kanishk99/" target="_blank" rel="noopener">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            LinkedIn
+          </a>
         </div>
       </div>
 
-      <div class="relative">
-        <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-xl shadow-black/30">
-          <div class="flex items-center justify-between mb-3">
-            <p class="text-sm font-semibold">Synthetic price path</p>
-            <span class="text-xs text-slate-400">GBM</span>
+      <div class="relative animate-slide-up">
+        <div class="gradient-border rounded-2xl bg-white/5 backdrop-blur p-6 shadow-2xl shadow-black/40">
+          <div class="flex items-center justify-between mb-4">
+            <p class="text-sm font-semibold text-slate-200">Synthetic Price Path</p>
+            <span class="text-xs text-slate-400 px-2 py-1 rounded-lg bg-slate-950/50">GBM Simulation</span>
           </div>
-          <div class="aspect-[4/3] rounded-xl border border-white/10 bg-slate-950/40 p-2">
+          <div class="aspect-[4/3] rounded-xl border border-white/10 bg-slate-950/60 p-3">
             <canvas id="spark" class="w-full h-full"></canvas>
           </div>
         </div>
-        <p class="text-xs text-slate-400 mt-2">Generated on load (for vibes, not signals).</p>
+        <p class="text-xs text-slate-500 mt-3 text-center">Generated on load · Geometric Brownian Motion</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="border-y border-white/5 bg-white/[0.02]">
+    <div class="max-w-6xl mx-auto px-4 py-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div>
+          <div class="text-3xl font-bold text-brand-400" id="projectCount">7</div>
+          <div class="text-sm text-slate-400 mt-1">Projects</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-brand-400">5+</div>
+          <div class="text-sm text-slate-400 mt-1">Risk Models</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-brand-400">100%</div>
+          <div class="text-sm text-slate-400 mt-1">Open Source</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-brand-400">Live</div>
+          <div class="text-sm text-slate-400 mt-1">Demos Available</div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Projects -->
-  <section id="projects" class="py-16">
+  <section id="projects" class="py-20">
     <div class="max-w-6xl mx-auto px-4">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8">
         <div>
-          <h2 class="text-2xl font-bold">Projects</h2>
-          <p class="mt-1 text-sm text-slate-300">Filter by keyword or tag. Click Code/Demo to view.</p>
+          <div class="text-sm font-medium text-brand-400 mb-2">Portfolio</div>
+          <h2 class="text-3xl font-bold">Featured Projects</h2>
+          <p class="mt-2 text-slate-400">Production-ready risk engines and research tools</p>
         </div>
 
-        <div class="flex flex-col sm:flex-row gap-2">
-          <input id="search" type="search" placeholder="Filter projects…" class="px-3 py-2 rounded-xl text-sm bg-slate-950/60 border border-white/10 focus:border-brand-400/60">
-          <select id="tagFilter" class="px-3 py-2 rounded-xl text-sm bg-slate-950/60 border border-white/10 focus:border-brand-400/60">
-            <option value="">All tags</option>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <div class="relative">
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            <input id="search" type="search" placeholder="Search projects…" class="pl-10 pr-4 py-2.5 rounded-xl text-sm bg-slate-950/60 border border-white/10 focus:border-brand-400/60 focus:ring-1 focus:ring-brand-400/20 transition w-full sm:w-48">
+          </div>
+          <select id="tagFilter" class="px-4 py-2.5 rounded-xl text-sm bg-slate-950/60 border border-white/10 focus:border-brand-400/60 focus:ring-1 focus:ring-brand-400/20 transition">
+            <option value="">All categories</option>
           </select>
         </div>
       </div>
 
-      <div id="projectGrid" class="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      <div id="projectGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
 
-      <div id="emptyState" class="hidden mt-8 p-6 rounded-2xl border border-white/10 bg-white/5 text-slate-300">
-        No projects match your filters.
+      <div id="emptyState" class="hidden mt-10 p-8 rounded-2xl border border-white/10 bg-white/5 text-center">
+        <div class="text-4xl mb-3">🔍</div>
+        <p class="text-slate-300">No projects match your filters.</p>
+        <button onclick="document.getElementById('search').value=''; document.getElementById('tagFilter').value=''; render();" class="mt-3 text-sm text-brand-400 hover:text-brand-300 transition">Clear filters</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="py-20 border-t border-white/5">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="text-sm font-medium text-brand-400 mb-2">Expertise</div>
+      <h2 class="text-3xl font-bold">Technical Skills</h2>
+      
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur">
+          <div class="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center mb-4">
+            <span class="text-xl">⚠️</span>
+          </div>
+          <h3 class="font-semibold text-lg">Risk Management</h3>
+          <p class="text-sm text-slate-400 mt-2">Market Risk, Credit Risk, XVA, FRTB, Basel III/IV, VaR, Expected Shortfall, IFRS 9 ECL</p>
+        </div>
+        
+        <div class="p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur">
+          <div class="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center mb-4">
+            <span class="text-xl">⚡</span>
+          </div>
+          <h3 class="font-semibold text-lg">Energy & Commodities</h3>
+          <p class="text-sm text-slate-400 mt-2">Power Pricing, Gas Spreads, LNG Netbacks, Tariff Engines, ENTSO-E, SEMOpx</p>
+        </div>
+        
+        <div class="p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur">
+          <div class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center mb-4">
+            <span class="text-xl">🐍</span>
+          </div>
+          <h3 class="font-semibold text-lg">Tech Stack</h3>
+          <p class="text-sm text-slate-400 mt-2">Python, NumPy, Pandas, Scikit-learn, Streamlit, React, TypeScript, Next.js, SQL</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="py-16 border-t border-white/5">
+  <section id="contact" class="py-20 border-t border-white/5">
     <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-2xl font-bold">Contact</h2>
-      <p class="mt-2 text-slate-300">
+      <div class="text-sm font-medium text-brand-400 mb-2">Get in Touch</div>
+      <h2 class="text-3xl font-bold">Contact</h2>
+      <p class="mt-3 text-slate-400 max-w-xl">
         Open to internships and full-time roles in quantitative finance, market risk, credit risk, and energy analytics.
       </p>
 
-      <div class="mt-5 grid sm:grid-cols-2 gap-4">
-        <a href="mailto:K99kanishk@gmail.com" class="p-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-          <div class="text-sm text-slate-300">Email</div>
-          <div class="font-semibold">K99kanishk@gmail.com</div>
+      <div class="mt-8 grid sm:grid-cols-2 gap-4 max-w-2xl">
+        <a href="mailto:K99kanishk@gmail.com" class="group p-5 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-500/20 flex items-center justify-center group-hover:bg-brand-500/30 transition">
+              <svg class="w-5 h-5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <div>
+              <div class="text-sm text-slate-400">Email</div>
+              <div class="font-semibold">K99kanishk@gmail.com</div>
+            </div>
+          </div>
         </a>
-        <a href="https://www.linkedin.com/in/kanishk99/" target="_blank" rel="noopener" class="p-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
-          <div class="text-sm text-slate-300">LinkedIn</div>
-          <div class="font-semibold">/in/kanishk99</div>
+        <a href="https://www.linkedin.com/in/kanishk99/" target="_blank" rel="noopener" class="group p-5 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-500/20 flex items-center justify-center group-hover:bg-brand-500/30 transition">
+              <svg class="w-5 h-5 text-brand-400" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </div>
+            <div>
+              <div class="text-sm text-slate-400">LinkedIn</div>
+              <div class="font-semibold">/in/kanishk99</div>
+            </div>
+          </div>
         </a>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="py-10 border-t border-white/10">
-    <div class="max-w-6xl mx-auto px-4 text-sm text-slate-400 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-      <p>© <span id="year"></span> Kanishk. Built with HTML + Tailwind.</p>
-      <p class="text-slate-500">Last updated: <span id="lastUpdated"></span></p>
+  <footer class="py-8 border-t border-white/10">
+    <div class="max-w-6xl mx-auto px-4 text-sm text-slate-500 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+      <p>© <span id="year"></span> Kanishk Sharma. All rights reserved.</p>
+      <p>Last updated: <span id="lastUpdated"></span></p>
     </div>
   </footer>
 
   <!-- Data & Script -->
   <script>
     const projects = [
+      // ⭐ IFRS 9 ECL Engine (Featured)
+      {
+        title: 'IFRS 9 ECL Engine',
+        summary: 'Production-grade Expected Credit Loss engine implementing the IFRS 9 three-stage impairment model. Features PD/LGD/EAD modeling, multi-scenario forecasting (Base/Upside/Downside), management overlays with audit trails, DCF projections, and governance dashboards.',
+        tags: ['Risk', 'Credit Risk', 'IFRS 9', 'ECL', 'Python', 'Streamlit', 'Machine Learning', 'Governance'],
+        featured: true,
+        links: {
+          code: 'https://github.com/k9kanishk/ifrs9-ecl-engine',
+          paper: '',
+          demo: 'https://ifrs9-ecl-engine.streamlit.app/'
+        }
+      },
       {
         title: 'ROI/NI Energy Tariff Pricing Engine',
         summary: 'All-in electricity/gas tariff builder for ROI + NI: wholesale curve inputs, shaping/losses, pass-through charge library, margin/risk adders, sanity bounds, and Streamlit tender output.',
@@ -204,22 +380,22 @@
         links: {
           code: 'https://github.com/k9kanishk/energy-tariff-pricing-engine',
           paper: '',
-          demo: 'https://energy-tariff-pricing-engine-dhq6xndappucbuy8ev7sg5p.streamlit.app/' // add your Streamlit URL if deployed
+          demo: 'https://energy-tariff-pricing-engine-dhq6xndappucbuy8ev7sg5p.streamlit.app/'
         }
       },
       {
-        title: 'Cross-Market Gas Spread & Netback Arbitrage (TTF–NBP–JKM)',
-        summary: 'Streamlit research dashboard analyzing TTF–NBP hub spreads and TTF–JKM LNG netbacks. Normalizes benchmarks into a common EUR/MWh basis using FX + unit conversions, fits mean-reversion (AR(1)) models, generates z-score convergence signals, and backtests spread trades with train/test and rolling walk-forward evaluation, transaction costs, and parameter sweeps.',
-        tags: ['Gas', 'Spreads', 'Arbitrage', 'Time Series', 'Streamlit', 'Python', 'Mean Reversion', 'Backtesting','FX'],
+        title: 'Cross-Market Gas Spread & Netback Arbitrage',
+        summary: 'Research dashboard analyzing TTF–NBP hub spreads and TTF–JKM LNG netbacks. Normalizes benchmarks into EUR/MWh, fits mean-reversion models, generates z-score signals, and backtests spread trades.',
+        tags: ['Energy', 'Gas', 'Spreads', 'Arbitrage', 'Time Series', 'Streamlit', 'Python', 'Mean Reversion'],
         links: {
           code: 'https://github.com/k9kanishk/gas-spread-arb/tree/main',
           paper: '',
-          demo: 'https://gas-spread-arb-cm8xfqptevxytwqnutfueb.streamlit.app/' 
+          demo: 'https://gas-spread-arb-cm8xfqptevxytwqnutfueb.streamlit.app/'
         }
       },
       {
         title: 'Global ETF Cross-Market Arbitrage Explorer',
-        summary: 'Streamlit research dashboard pulling live ETF data, normalizing US/EU listings via FX, computing rolling z-scores, and backtesting mean-reversion trades with costs.',
+        summary: 'Research dashboard pulling live ETF data, normalizing US/EU listings via FX, computing rolling z-scores, and backtesting mean-reversion trades with transaction costs.',
         tags: ['ETFs', 'Arbitrage', 'Quant', 'Time Series', 'FX', 'Streamlit', 'Python'],
         links: {
           code: 'https://github.com/k9kanishk/etf-crossmarket-arb',
@@ -229,8 +405,8 @@
       },
       {
         title: 'Enterprise XVA Engine',
-        summary: 'Interactive CVA/FVA/MVA/KVA demo with Greeks and scenario shocks. Monte-Carlo engine, flat-curve funding proxy, JSON import/export.',
-        tags: ['Risk', 'XVA', 'Credit', 'Monte Carlo', 'Greeks', 'React', 'TypeScript'],
+        summary: 'Interactive CVA/FVA/MVA/KVA demo with Greeks and scenario shocks. Monte-Carlo engine, flat-curve funding proxy, JSON import/export for portfolio analysis.',
+        tags: ['Risk', 'XVA', 'Credit Risk', 'Monte Carlo', 'Greeks', 'React', 'TypeScript'],
         links: {
           code: 'https://github.com/k9kanishk/xva-demo',
           paper: '',
@@ -239,8 +415,8 @@
       },
       {
         title: 'Basel III Endgame (FRTB-SA) Risk App',
-        summary: 'Next.js app that estimates pre/post-Endgame RWA using the FRTB-SA SBM engine. Multi-risk-class (Rates/FX/Equity), desk hot-spots, instrument-level audit trail.',
-        tags: ['Risk', 'Market Risk', 'FRTB', 'Basel', 'RWA', 'Next.js', 'React', 'TypeScript', 'Tailwind'],
+        summary: 'Next.js app that estimates pre/post-Endgame RWA using the FRTB-SA SBM engine. Multi-risk-class support, desk hot-spots, and instrument-level audit trail.',
+        tags: ['Risk', 'Market Risk', 'FRTB', 'Basel', 'RWA', 'Next.js', 'React', 'TypeScript'],
         links: {
           code: 'https://github.com/k9kanishk/basel-endgame-frtb',
           paper: '',
@@ -249,16 +425,18 @@
       },
       {
         title: 'Irish Day-Ahead Power Price Forecast',
-        summary: 'Streamlit dashboard forecasting Irish SEMOpx day-ahead prices using lookback data + ENTSO-E fundamentals + weather features. XGBoost with backtest metrics.',
-        tags: ['Energy', 'Time Series', 'Forecasting', 'XGBoost', 'Streamlit', 'Python', 'SEMOpx', 'ENTSO-E'],
+        summary: 'Forecasting Irish SEMOpx day-ahead prices using lookback data, ENTSO-E fundamentals, and weather features. XGBoost model with comprehensive backtest metrics.',
+        tags: ['Energy', 'Time Series', 'Forecasting', 'XGBoost', 'Streamlit', 'Python', 'SEMOpx'],
         links: {
           code: 'https://github.com/k9kanishk/irish-dam-forecast/tree/new2',
           paper: '',
           demo: 'https://zqqdj8exuksfkruaw9ds2n.streamlit.app/'
         }
       }
-      
     ];
+
+    // Update project count
+    document.getElementById('projectCount').textContent = projects.length;
 
     const allTags = Array.from(new Set(projects.flatMap(p => p.tags))).sort();
     const tagFilter = document.getElementById('tagFilter');
@@ -271,16 +449,35 @@
     const emptyState = document.getElementById('emptyState');
     const search = document.getElementById('search');
 
-    function pill(text) {
-      return `<span class="px-2 py-1 rounded-lg bg-slate-950/40 border border-white/10 text-xs text-slate-200">${text}</span>`;
+    function getTagClass(tag) {
+      const riskTags = ['Risk', 'Credit Risk', 'Market Risk', 'XVA', 'FRTB', 'Basel', 'RWA', 'IFRS 9', 'ECL', 'Governance'];
+      const energyTags = ['Energy', 'Gas', 'Pricing', 'Tariffs', 'SEMOpx', 'ENTSO-E', 'ROI', 'NI'];
+      const quantTags = ['Quant', 'Arbitrage', 'Spreads', 'Time Series', 'Mean Reversion', 'Monte Carlo', 'Greeks', 'Forecasting'];
+      const techTags = ['Python', 'Streamlit', 'React', 'TypeScript', 'Next.js', 'Machine Learning', 'XGBoost'];
+      
+      if (riskTags.includes(tag)) return 'tag-risk';
+      if (energyTags.includes(tag)) return 'tag-energy';
+      if (quantTags.includes(tag)) return 'tag-quant';
+      if (techTags.includes(tag)) return 'tag-python';
+      return '';
     }
 
-    function actionButton(label, href) {
+    function pill(tag) {
+      const colorClass = getTagClass(tag);
+      return `<span class="px-2.5 py-1 rounded-lg border text-xs ${colorClass || 'bg-slate-950/40 border-white/10 text-slate-300'}">${tag}</span>`;
+    }
+
+    function actionButton(label, href, primary = false) {
+      const baseClass = primary 
+        ? 'bg-brand-600 hover:bg-brand-500 text-white border-brand-600' 
+        : 'bg-white/5 hover:bg-white/10 border-white/10 hover:border-white/20';
       return `
-        <a class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 transition"
+        <a class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl border ${baseClass} transition text-sm font-medium"
            target="_blank" rel="noopener" href="${href}">
           ${label}
-          <span class="text-white/30">↗</span>
+          <svg class="w-3.5 h-3.5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+          </svg>
         </a>
       `;
     }
@@ -309,32 +506,33 @@
 
       filtered.forEach(p => {
         const card = document.createElement('article');
-        card.className =
-          'group p-5 rounded-2xl border border-white/10 bg-white/5 backdrop-blur shadow-xl shadow-black/20 ' +
-          'transition transform hover:-translate-y-0.5 hover:border-white/20';
+        card.className = 'project-card group p-6 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur';
 
         const actions = [
+          p.links.demo ? actionButton('Live Demo', p.links.demo, true) : '',
           p.links.code ? actionButton('Code', p.links.code) : '',
-          p.links.paper ? actionButton('Paper', p.links.paper) : '',
-          p.links.demo ? actionButton('Demo', p.links.demo) : ''
+          p.links.paper ? actionButton('Paper', p.links.paper) : ''
         ].filter(Boolean).join('');
 
+        const featuredBadge = p.featured 
+          ? `<span class="featured-badge text-xs px-2 py-1 rounded-lg text-white font-medium">⭐ Featured</span>`
+          : `<span class="text-xs px-2 py-1 rounded-lg border border-brand-400/30 text-brand-300 bg-brand-900/20">Project</span>`;
+
         card.innerHTML = `
-          <div class="flex items-start justify-between gap-3">
-            <h3 class="font-semibold text-slate-100">${p.title}</h3>
-            <span class="text-xs px-2 py-1 rounded-lg border border-brand-400/30 text-brand-200 bg-brand-900/20">
-              Project
-            </span>
+          <div class="flex items-start justify-between gap-3 mb-3">
+            <h3 class="font-semibold text-lg text-slate-100 group-hover:text-brand-300 transition">${p.title}</h3>
+            ${featuredBadge}
           </div>
 
-          <p class="mt-2 text-sm text-slate-300 leading-relaxed">${p.summary}</p>
+          <p class="text-sm text-slate-400 leading-relaxed mb-4">${p.summary}</p>
 
-          <div class="mt-3 flex flex-wrap gap-2">
-            ${p.tags.map(pill).join('')}
+          <div class="flex flex-wrap gap-1.5 mb-5">
+            ${p.tags.slice(0, 5).map(pill).join('')}
+            ${p.tags.length > 5 ? `<span class="px-2 py-1 text-xs text-slate-500">+${p.tags.length - 5}</span>` : ''}
           </div>
 
-          <div class="mt-4 flex flex-wrap gap-2">
-            ${actions || `<span class="text-sm text-slate-400">No links yet</span>`}
+          <div class="flex flex-wrap gap-2">
+            ${actions || `<span class="text-sm text-slate-500">Coming soon</span>`}
           </div>
         `;
 
@@ -349,6 +547,7 @@
     document.getElementById('year').textContent = new Date().getFullYear();
     document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString(undefined, { year:'numeric', month:'short', day:'2-digit' });
 
+    // GBM Chart
     function drawGBM(canvas) {
       const ctx = canvas.getContext('2d');
       const w = canvas.width = Math.floor(canvas.clientWidth * window.devicePixelRatio);
@@ -356,20 +555,21 @@
 
       ctx.clearRect(0, 0, w, h);
 
-      // Background grid-ish
-      ctx.globalAlpha = 0.18;
+      // Subtle grid
+      ctx.globalAlpha = 0.08;
       ctx.strokeStyle = '#ffffff';
       ctx.lineWidth = 1;
-      for (let x = 0; x < w; x += Math.floor(40 * window.devicePixelRatio)) {
+      const gridSize = Math.floor(40 * window.devicePixelRatio);
+      for (let x = 0; x < w; x += gridSize) {
         ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
       }
-      for (let y = 0; y < h; y += Math.floor(40 * window.devicePixelRatio)) {
+      for (let y = 0; y < h; y += gridSize) {
         ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
       }
       ctx.globalAlpha = 1;
 
       // GBM path
-      const n = 240, mu = 0.10, sigma = 0.25, dt = 1 / n;
+      const n = 200, mu = 0.08, sigma = 0.22, dt = 1 / n;
       let s = 1.0;
       const path = [s];
 
@@ -381,20 +581,39 @@
 
       const min = Math.min(...path);
       const max = Math.max(...path);
+      const padding = 16;
+
+      // Gradient fill
+      const gradient = ctx.createLinearGradient(0, 0, 0, h);
+      gradient.addColorStop(0, 'rgba(99, 169, 251, 0.15)');
+      gradient.addColorStop(1, 'rgba(99, 169, 251, 0)');
 
       ctx.beginPath();
+      ctx.moveTo(padding, h - padding);
       path.forEach((v, i) => {
-        const x = i / (n - 1) * (w - 24) + 12;
-        const y = h - ((v - min) / (max - min + 1e-9)) * (h - 24) - 12;
+        const x = i / (n - 1) * (w - 2 * padding) + padding;
+        const y = h - ((v - min) / (max - min + 1e-9)) * (h - 2 * padding) - padding;
+        ctx.lineTo(x, y);
+      });
+      ctx.lineTo(w - padding, h - padding);
+      ctx.closePath();
+      ctx.fillStyle = gradient;
+      ctx.fill();
+
+      // Line
+      ctx.beginPath();
+      path.forEach((v, i) => {
+        const x = i / (n - 1) * (w - 2 * padding) + padding;
+        const y = h - ((v - min) / (max - min + 1e-9)) * (h - 2 * padding) - padding;
         i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
       });
 
-      ctx.lineWidth = Math.max(2, Math.floor(3 * window.devicePixelRatio));
+      ctx.lineWidth = Math.max(2, Math.floor(2.5 * window.devicePixelRatio));
       ctx.lineJoin = 'round';
       ctx.lineCap = 'round';
       ctx.strokeStyle = '#63a9fb';
-      ctx.shadowColor = 'rgba(99,169,251,0.35)';
-      ctx.shadowBlur = 12;
+      ctx.shadowColor = 'rgba(99,169,251,0.4)';
+      ctx.shadowBlur = 8;
       ctx.stroke();
       ctx.shadowBlur = 0;
     }
@@ -403,6 +622,17 @@
     const resize = () => drawGBM(canvas);
     window.addEventListener('resize', resize);
     resize();
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
   </script>
 </body>
 </html>
