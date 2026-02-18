@@ -3,14 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Kanishk — Quant Finance Portfolio</title>
-  <meta name="description" content="Kanishk's portfolio showcasing quantitative finance projects." />
-  <meta name="author" content="Kanishk" />
-  <meta property="og:title" content="Kanishk — Quant Finance Portfolio" />
-  <meta property="og:description" content="Kanishk's portfolio showcasing quantitative finance projects." />
+  <title>Kanishk Sharma — Quant Finance Portfolio</title>
+  <meta name="description" content="Kanishk Sharma's portfolio showcasing quantitative finance projects — risk engines, pricing models, and research dashboards." />
+  <meta name="author" content="Kanishk Sharma" />
+  <meta property="og:title" content="Kanishk Sharma — Quant Finance Portfolio" />
+  <meta property="og:description" content="Building risk engines, pricing models, and research dashboards." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -18,15 +23,29 @@
     tailwind.config = {
       theme: {
         extend: {
+          fontFamily: {
+            sans: ['DM Sans', 'system-ui', 'sans-serif'],
+            serif: ['Instrument Serif', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
           colors: {
             brand: {
-              50: '#f0f7ff', 100: '#daeefe', 200: '#bfe0fe', 300: '#93c9fd', 400: '#63a9fb', 500: '#3e86f6', 600: '#2f69e9', 700: '#2a56c7', 800: '#2447a1', 900: '#1e397f'
+              50: '#eef6ff', 100: '#d9eaff', 200: '#bcd9ff', 300: '#8ec1ff',
+              400: '#59a0ff', 500: '#3380ff', 600: '#1a62f5', 700: '#134de1',
+              800: '#1640b6', 900: '#163a8f', 950: '#112557'
+            },
+            surface: {
+              950: '#080b12', 900: '#0d1117', 800: '#151b27', 700: '#1c2433',
             }
           },
           animation: {
-            'fade-in': 'fadeIn 0.5s ease-out',
-            'slide-up': 'slideUp 0.5s ease-out',
-            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'fade-in': 'fadeIn 0.8s ease-out both',
+            'fade-in-delay': 'fadeIn 0.8s ease-out 0.15s both',
+            'fade-in-delay-2': 'fadeIn 0.8s ease-out 0.3s both',
+            'slide-up': 'slideUp 0.8s cubic-bezier(0.16,1,0.3,1) both',
+            'slide-up-delay': 'slideUp 0.8s cubic-bezier(0.16,1,0.3,1) 0.2s both',
+            'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'float 6s ease-in-out infinite',
           },
           keyframes: {
             fadeIn: {
@@ -34,8 +53,12 @@
               '100%': { opacity: '1' },
             },
             slideUp: {
-              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '0%': { opacity: '0', transform: 'translateY(24px)' },
               '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-8px)' },
             },
           },
         }
@@ -50,7 +73,7 @@
   {
     "@context": "https://schema.org",
     "@type": "Person",
-    "name": "Kanishk",
+    "name": "Kanishk Sharma",
     "url": "https://k9kanishk.github.io",
     "jobTitle": "Quantitative Analyst",
     "sameAs": [
@@ -63,286 +86,340 @@
   <style>
     :root { color-scheme: dark; }
 
-    /* Subtle grid background */
-    .bg-grid {
-      position: relative;
-      background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 32px 32px;
-      background-position: -1px -1px;
+    /* Noise overlay for texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      opacity: 0.018;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     }
 
-    /* Background glow - enhanced */
+    /* Subtle dot grid background */
+    .bg-dots {
+      background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    /* Background glow */
     .glow {
       background:
-        radial-gradient(800px circle at 20% 20%, rgba(62,134,246,.20), transparent 45%),
-        radial-gradient(600px circle at 80% 10%, rgba(99,169,251,.12), transparent 48%),
-        radial-gradient(900px circle at 70% 80%, rgba(47,105,233,.08), transparent 50%),
-        radial-gradient(400px circle at 50% 50%, rgba(147,201,253,.05), transparent 60%);
-      filter: saturate(120%);
+        radial-gradient(ellipse 900px 600px at 15% 10%, rgba(26,98,245,.14), transparent 50%),
+        radial-gradient(ellipse 700px 500px at 85% 5%, rgba(89,160,255,.08), transparent 50%),
+        radial-gradient(ellipse 1000px 700px at 65% 80%, rgba(19,77,225,.06), transparent 50%);
     }
 
-    /* Animated gradient border */
-    .gradient-border {
+    /* Animated gradient border for cards */
+    .card-glow {
       position: relative;
-      background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+      background: rgba(255,255,255,0.02);
+      border: 1px solid rgba(255,255,255,0.06);
       border-radius: 1rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .gradient-border::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      padding: 1px;
-      background: linear-gradient(135deg, rgba(99,169,251,0.3), rgba(62,134,246,0.1), rgba(47,105,233,0.3));
-      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
+    .card-glow:hover {
+      background: rgba(255,255,255,0.04);
+      border-color: rgba(255,255,255,0.1);
+      transform: translateY(-2px);
+      box-shadow: 0 24px 48px -12px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
     }
 
-    /* Nicer focus */
+    /* Featured card special treatment */
+    .card-featured {
+      border-color: rgba(51,128,255,0.2);
+      background: linear-gradient(135deg, rgba(51,128,255,0.04), rgba(255,255,255,0.02));
+    }
+    .card-featured:hover {
+      border-color: rgba(51,128,255,0.35);
+      box-shadow: 0 24px 48px -12px rgba(0,0,0,0.5), 0 0 40px -8px rgba(51,128,255,0.12);
+    }
+
+    /* Focus styles */
     a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
-      outline: 2px solid rgba(99,169,251,0.8);
+      outline: 2px solid rgba(51,128,255,0.6);
       outline-offset: 2px;
-      border-radius: 12px;
-    }
-
-    /* Card hover effect */
-    .project-card {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .project-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255,255,255,0.1);
-    }
-
-    /* Featured badge animation */
-    .featured-badge {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      border-radius: 8px;
     }
 
     /* Smooth scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+    /* Tag styles */
+    .tag { 
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 6px;
+      border: 1px solid;
+      white-space: nowrap;
     }
-    ::-webkit-scrollbar-track {
-      background: rgba(255,255,255,0.05);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.15);
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(255,255,255,0.25);
+    .tag-risk { background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.2); color: #f87171; }
+    .tag-energy { background: rgba(34,197,94,0.08); border-color: rgba(34,197,94,0.2); color: #4ade80; }
+    .tag-quant { background: rgba(168,85,247,0.08); border-color: rgba(168,85,247,0.2); color: #c084fc; }
+    .tag-tech { background: rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.2); color: #60a5fa; }
+    .tag-data { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.2); color: #fbbf24; }
+
+    /* Divider line */
+    .accent-line {
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(51,128,255,0.8), rgba(51,128,255,0));
     }
 
-    /* Tag colors by category */
-    .tag-risk { background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.3); color: #fca5a5; }
-    .tag-energy { background: rgba(34, 197, 94, 0.15); border-color: rgba(34, 197, 94, 0.3); color: #86efac; }
-    .tag-quant { background: rgba(168, 85, 247, 0.15); border-color: rgba(168, 85, 247, 0.3); color: #d8b4fe; }
-    .tag-python { background: rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.3); color: #93c5fd; }
+    /* Skill bar animation */
+    .skill-bar { transition: width 1s cubic-bezier(0.16, 1, 0.3, 1); }
+
+    /* Section reveal animation */
+    .reveal { opacity: 0; transform: translateY(20px); transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Canvas glow effect */
+    .canvas-container {
+      position: relative;
+    }
+    .canvas-container::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(51,128,255,0.15), transparent 40%, transparent 60%, rgba(51,128,255,0.08));
+      pointer-events: none;
+    }
+
+    /* New badge pulse */
+    @keyframes newPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(52,211,153,0.4); }
+      50% { box-shadow: 0 0 0 6px rgba(52,211,153,0); }
+    }
+    .badge-new {
+      animation: newPulse 2s ease-in-out infinite;
+    }
   </style>
 </head>
 
-<body class="min-h-screen text-slate-100 bg-slate-950 relative overflow-x-hidden">
-  <div class="glow absolute inset-0 -z-10"></div>
+<body class="min-h-screen text-slate-200 bg-surface-950 relative overflow-x-hidden font-sans antialiased">
+  <div class="glow fixed inset-0 -z-10 pointer-events-none"></div>
 
   <!-- Header / Nav -->
-  <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-950/80 border-b border-white/5">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="#top" class="font-semibold tracking-tight hover:text-brand-300 transition flex items-center gap-2">
-        <span class="w-2 h-2 rounded-full bg-brand-400 animate-pulse-slow"></span>
-        Kanishk
+  <header class="sticky top-0 z-50 backdrop-blur-xl bg-surface-950/70 border-b border-white/[0.04]">
+    <div class="max-w-6xl mx-auto px-6 py-3.5 flex items-center justify-between">
+      <a href="#top" class="group flex items-center gap-2.5 hover:text-white transition">
+        <span class="w-2 h-2 rounded-full bg-brand-500 animate-pulse-slow shadow-lg shadow-brand-500/30"></span>
+        <span class="font-semibold tracking-tight text-sm">Kanishk Sharma</span>
       </a>
-      <nav class="flex gap-1 text-sm">
-        <a href="#projects" class="px-4 py-2 rounded-xl hover:bg-white/5 hover:text-brand-300 transition">Projects</a>
-        <a href="#skills" class="px-4 py-2 rounded-xl hover:bg-white/5 hover:text-brand-300 transition">Skills</a>
-        <a href="#contact" class="px-4 py-2 rounded-xl hover:bg-white/5 hover:text-brand-300 transition">Contact</a>
+      <nav class="flex gap-0.5 text-sm">
+        <a href="#projects" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all">Projects</a>
+        <a href="#skills" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all">Skills</a>
+        <a href="#contact" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all">Contact</a>
       </nav>
     </div>
   </header>
 
   <!-- Hero -->
-  <section id="top" class="bg-grid">
-    <div class="max-w-6xl mx-auto px-4 py-24 grid md:grid-cols-2 gap-12 items-center">
-      <div class="animate-fade-in">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 text-xs text-slate-200 backdrop-blur">
-          <span class="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></span>
+  <section id="top" class="bg-dots">
+    <div class="max-w-6xl mx-auto px-6 pt-24 pb-20 grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <div class="animate-fade-in inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/[0.08] bg-white/[0.03] text-xs text-slate-300">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
           Open to opportunities
         </div>
 
-        <h1 class="mt-6 text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
-          Quantitative Finance
-          <span class="bg-gradient-to-r from-brand-400 to-brand-600 bg-clip-text text-transparent"> Portfolio</span>
+        <h1 class="animate-fade-in-delay mt-8 text-5xl md:text-6xl lg:text-7xl font-light leading-[1.05] tracking-tight">
+          <span class="text-white">Quantitative</span><br>
+          <span class="font-serif italic text-brand-400">Finance</span>
+          <span class="text-white"> Portfolio</span>
         </h1>
 
-        <p class="mt-5 text-lg text-slate-300 leading-relaxed">
-          I'm <span class="font-semibold text-slate-100">Kanishk Sharma</span>.
+        <p class="animate-fade-in-delay-2 mt-6 text-lg text-slate-400 leading-relaxed max-w-md">
+          I'm <span class="text-white font-medium">Kanishk Sharma</span> —
           I build risk engines, pricing models, and research dashboards.
         </p>
 
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="#projects" class="px-6 py-3 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-700 text-white hover:from-brand-500 hover:to-brand-600 transition-all shadow-lg shadow-brand-900/40 font-medium">
+        <div class="animate-slide-up mt-10 flex flex-wrap gap-3">
+          <a href="#projects" class="group px-6 py-3 rounded-xl bg-brand-600 text-white hover:bg-brand-500 transition-all shadow-lg shadow-brand-950/50 text-sm font-medium flex items-center gap-2">
             View Projects
+            <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
           </a>
-          <a href="#contact" class="px-6 py-3 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 backdrop-blur transition font-medium">
+          <a href="#contact" class="px-6 py-3 rounded-xl border border-white/[0.08] bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/[0.12] backdrop-blur transition-all text-sm font-medium text-slate-300 hover:text-white">
             Get in Touch
           </a>
         </div>
 
-        <div class="mt-8 flex items-center gap-5 text-sm text-slate-400">
-          <a class="hover:text-brand-300 transition flex items-center gap-2" href="https://github.com/k9kanishk" target="_blank" rel="noopener">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        <div class="animate-slide-up-delay mt-10 flex items-center gap-6 text-sm text-slate-500">
+          <a class="hover:text-white transition flex items-center gap-2" href="https://github.com/k9kanishk" target="_blank" rel="noopener">
+            <svg class="w-4.5 h-4.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
             GitHub
           </a>
-          <span class="text-white/20">•</span>
-          <a class="hover:text-brand-300 transition flex items-center gap-2" href="https://www.linkedin.com/in/kanishk99/" target="_blank" rel="noopener">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          <a class="hover:text-white transition flex items-center gap-2" href="https://www.linkedin.com/in/kanishk99/" target="_blank" rel="noopener">
+            <svg class="w-4.5 h-4.5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             LinkedIn
           </a>
         </div>
       </div>
 
       <div class="relative animate-slide-up">
-        <div class="gradient-border rounded-2xl bg-white/5 backdrop-blur p-6 shadow-2xl shadow-black/40">
-          <div class="flex items-center justify-between mb-4">
-            <p class="text-sm font-semibold text-slate-200">Synthetic Price Path</p>
-            <span class="text-xs text-slate-400 px-2 py-1 rounded-lg bg-slate-950/50">GBM Simulation</span>
+        <div class="canvas-container rounded-2xl border border-white/[0.06] bg-surface-900/80 backdrop-blur-sm p-5 shadow-2xl shadow-black/40">
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2">
+              <div class="flex gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-white/10"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-white/10"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-white/10"></span>
+              </div>
+              <span class="text-xs font-mono text-slate-500 ml-2">gbm_simulation.py</span>
+            </div>
+            <span class="text-[10px] font-mono text-slate-600 px-2 py-0.5 rounded bg-white/[0.03]">GBM · μ=0.08 σ=0.22</span>
           </div>
-          <div class="aspect-[4/3] rounded-xl border border-white/10 bg-slate-950/60 p-3">
+          <div class="aspect-[4/3] rounded-xl bg-surface-950/80 p-3">
             <canvas id="spark" class="w-full h-full"></canvas>
           </div>
         </div>
-        <p class="text-xs text-slate-500 mt-3 text-center">Generated on load · Geometric Brownian Motion</p>
+        <p class="text-[11px] font-mono text-slate-600 mt-3 text-center tracking-wide">Geometric Brownian Motion · regenerated on load</p>
       </div>
     </div>
   </section>
 
   <!-- Stats Bar -->
-  <section class="border-y border-white/5 bg-white/[0.02]">
-    <div class="max-w-6xl mx-auto px-4 py-8">
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-        <div>
-          <div class="text-3xl font-bold text-brand-400" id="projectCount">7</div>
-          <div class="text-sm text-slate-400 mt-1">Projects</div>
+  <section class="border-y border-white/[0.04] bg-white/[0.01]">
+    <div class="max-w-6xl mx-auto px-6 py-10">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="text-center">
+          <div class="text-3xl font-light text-white" id="projectCount">8</div>
+          <div class="text-xs font-mono text-slate-500 mt-1.5 tracking-wider uppercase">Projects</div>
         </div>
-        <div>
-          <div class="text-3xl font-bold text-brand-400">5+</div>
-          <div class="text-sm text-slate-400 mt-1">Risk Models</div>
+        <div class="text-center">
+          <div class="text-3xl font-light text-white">5+</div>
+          <div class="text-xs font-mono text-slate-500 mt-1.5 tracking-wider uppercase">Risk Models</div>
         </div>
-        <div>
-          <div class="text-3xl font-bold text-brand-400">100%</div>
-          <div class="text-sm text-slate-400 mt-1">Open Source</div>
+        <div class="text-center">
+          <div class="text-3xl font-light text-white">100%</div>
+          <div class="text-xs font-mono text-slate-500 mt-1.5 tracking-wider uppercase">Open Source</div>
         </div>
-        <div>
-          <div class="text-3xl font-bold text-brand-400">Live</div>
-          <div class="text-sm text-slate-400 mt-1">Demos Available</div>
+        <div class="text-center">
+          <div class="text-3xl font-light text-white">Live</div>
+          <div class="text-xs font-mono text-slate-500 mt-1.5 tracking-wider uppercase">Demos Available</div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Projects -->
-  <section id="projects" class="py-20">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8">
-        <div>
-          <div class="text-sm font-medium text-brand-400 mb-2">Portfolio</div>
-          <h2 class="text-3xl font-bold">Featured Projects</h2>
-          <p class="mt-2 text-slate-400">Production-ready risk engines and research tools</p>
+  <section id="projects" class="py-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+        <div class="reveal">
+          <div class="accent-line mb-4"></div>
+          <h2 class="text-3xl md:text-4xl font-light text-white tracking-tight">
+            Featured <span class="font-serif italic text-brand-400">Projects</span>
+          </h2>
+          <p class="mt-3 text-slate-500 text-sm max-w-md">Production-ready risk engines, research dashboards, and quantitative analytics tools.</p>
         </div>
 
-        <div class="flex flex-col sm:flex-row gap-3">
+        <div class="flex flex-col sm:flex-row gap-2.5 reveal">
           <div class="relative">
-            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
             </svg>
-            <input id="search" type="search" placeholder="Search projects…" class="pl-10 pr-4 py-2.5 rounded-xl text-sm bg-slate-950/60 border border-white/10 focus:border-brand-400/60 focus:ring-1 focus:ring-brand-400/20 transition w-full sm:w-48">
+            <input id="search" type="search" placeholder="Search…" class="font-mono text-xs pl-9 pr-4 py-2.5 rounded-lg bg-surface-900 border border-white/[0.06] focus:border-brand-500/40 focus:ring-1 focus:ring-brand-500/20 transition w-full sm:w-44 placeholder:text-slate-600">
           </div>
-          <select id="tagFilter" class="px-4 py-2.5 rounded-xl text-sm bg-slate-950/60 border border-white/10 focus:border-brand-400/60 focus:ring-1 focus:ring-brand-400/20 transition">
+          <select id="tagFilter" class="font-mono text-xs px-3 py-2.5 rounded-lg bg-surface-900 border border-white/[0.06] focus:border-brand-500/40 focus:ring-1 focus:ring-brand-500/20 transition text-slate-300">
             <option value="">All categories</option>
           </select>
         </div>
       </div>
 
-      <div id="projectGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+      <div id="projectGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
 
-      <div id="emptyState" class="hidden mt-10 p-8 rounded-2xl border border-white/10 bg-white/5 text-center">
-        <div class="text-4xl mb-3">🔍</div>
-        <p class="text-slate-300">No projects match your filters.</p>
-        <button onclick="document.getElementById('search').value=''; document.getElementById('tagFilter').value=''; render();" class="mt-3 text-sm text-brand-400 hover:text-brand-300 transition">Clear filters</button>
+      <div id="emptyState" class="hidden mt-12 p-10 rounded-2xl border border-white/[0.06] bg-white/[0.02] text-center">
+        <div class="text-3xl mb-3 opacity-40">∅</div>
+        <p class="text-slate-400 text-sm">No projects match your filters.</p>
+        <button onclick="document.getElementById('search').value=''; document.getElementById('tagFilter').value=''; render();" class="mt-3 text-xs font-mono text-brand-400 hover:text-brand-300 transition">Clear filters</button>
       </div>
     </div>
   </section>
 
   <!-- Skills -->
-  <section id="skills" class="py-20 border-t border-white/5">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="text-sm font-medium text-brand-400 mb-2">Expertise</div>
-      <h2 class="text-3xl font-bold">Technical Skills</h2>
+  <section id="skills" class="py-24 border-t border-white/[0.04]">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal">
+        <div class="accent-line mb-4"></div>
+        <h2 class="text-3xl md:text-4xl font-light text-white tracking-tight">
+          Technical <span class="font-serif italic text-brand-400">Expertise</span>
+        </h2>
+      </div>
       
-      <div class="mt-8 grid md:grid-cols-3 gap-6">
-        <div class="p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur">
-          <div class="w-10 h-10 rounded-xl bg-red-500/20 flex items-center justify-center mb-4">
-            <span class="text-xl">⚠️</span>
+      <div class="mt-10 grid md:grid-cols-3 gap-4">
+        <div class="reveal card-glow p-6 backdrop-blur">
+          <div class="w-9 h-9 rounded-lg bg-red-500/10 border border-red-500/20 flex items-center justify-center mb-4">
+            <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
           </div>
-          <h3 class="font-semibold text-lg">Risk Management</h3>
-          <p class="text-sm text-slate-400 mt-2">Market Risk, Credit Risk, XVA, FRTB, Basel III/IV, VaR, Expected Shortfall, IFRS 9 ECL</p>
+          <h3 class="font-medium text-white">Risk Management</h3>
+          <p class="text-xs text-slate-500 mt-3 leading-relaxed font-mono">Market Risk · Credit Risk · XVA · FRTB · Basel III/IV · VaR · Expected Shortfall · IFRS 9 ECL · Data Quality</p>
         </div>
         
-        <div class="p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur">
-          <div class="w-10 h-10 rounded-xl bg-green-500/20 flex items-center justify-center mb-4">
-            <span class="text-xl">⚡</span>
+        <div class="reveal card-glow p-6 backdrop-blur">
+          <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-4">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
           </div>
-          <h3 class="font-semibold text-lg">Energy & Commodities</h3>
-          <p class="text-sm text-slate-400 mt-2">Power Pricing, Gas Spreads, LNG Netbacks, Tariff Engines, ENTSO-E, SEMOpx</p>
+          <h3 class="font-medium text-white">Energy & Commodities</h3>
+          <p class="text-xs text-slate-500 mt-3 leading-relaxed font-mono">Power Pricing · Gas Spreads · LNG Netbacks · Tariff Engines · ENTSO-E · SEMOpx</p>
         </div>
         
-        <div class="p-6 rounded-2xl border border-white/10 bg-white/5 backdrop-blur">
-          <div class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center mb-4">
-            <span class="text-xl">🐍</span>
+        <div class="reveal card-glow p-6 backdrop-blur">
+          <div class="w-9 h-9 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-4">
+            <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
           </div>
-          <h3 class="font-semibold text-lg">Tech Stack</h3>
-          <p class="text-sm text-slate-400 mt-2">Python, NumPy, Pandas, Scikit-learn, Streamlit, React, TypeScript, Next.js, SQL</p>
+          <h3 class="font-medium text-white">Tech Stack</h3>
+          <p class="text-xs text-slate-500 mt-3 leading-relaxed font-mono">Python · NumPy · Pandas · Scikit-learn · Streamlit · React · TypeScript · Next.js · SQL · SQLModel</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="py-20 border-t border-white/5">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="text-sm font-medium text-brand-400 mb-2">Get in Touch</div>
-      <h2 class="text-3xl font-bold">Contact</h2>
-      <p class="mt-3 text-slate-400 max-w-xl">
-        Open to internships and full-time roles in quantitative finance, market risk, credit risk, and energy analytics.
-      </p>
+  <section id="contact" class="py-24 border-t border-white/[0.04]">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="reveal">
+        <div class="accent-line mb-4"></div>
+        <h2 class="text-3xl md:text-4xl font-light text-white tracking-tight">
+          Get in <span class="font-serif italic text-brand-400">Touch</span>
+        </h2>
+        <p class="mt-3 text-slate-500 text-sm max-w-lg">
+          Open to internships and full-time roles in quantitative finance, market risk, credit risk, and energy analytics.
+        </p>
+      </div>
 
-      <div class="mt-8 grid sm:grid-cols-2 gap-4 max-w-2xl">
-        <a href="mailto:K99kanishk@gmail.com" class="group p-5 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-brand-500/20 flex items-center justify-center group-hover:bg-brand-500/30 transition">
-              <svg class="w-5 h-5 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="mt-10 grid sm:grid-cols-2 gap-4 max-w-2xl">
+        <a href="mailto:K99kanishk@gmail.com" class="group card-glow p-5 backdrop-blur">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-lg bg-brand-500/10 border border-brand-500/20 flex items-center justify-center group-hover:bg-brand-500/15 transition">
+              <svg class="w-4 h-4 text-brand-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
               </svg>
             </div>
             <div>
-              <div class="text-sm text-slate-400">Email</div>
-              <div class="font-semibold">K99kanishk@gmail.com</div>
+              <div class="text-[10px] font-mono text-slate-500 tracking-wider uppercase">Email</div>
+              <div class="text-sm text-white mt-0.5">K99kanishk@gmail.com</div>
             </div>
           </div>
         </a>
-        <a href="https://www.linkedin.com/in/kanishk99/" target="_blank" rel="noopener" class="group p-5 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 transition-all">
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-brand-500/20 flex items-center justify-center group-hover:bg-brand-500/30 transition">
-              <svg class="w-5 h-5 text-brand-400" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        <a href="https://www.linkedin.com/in/kanishk99/" target="_blank" rel="noopener" class="group card-glow p-5 backdrop-blur">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-lg bg-brand-500/10 border border-brand-500/20 flex items-center justify-center group-hover:bg-brand-500/15 transition">
+              <svg class="w-4 h-4 text-brand-400" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             </div>
             <div>
-              <div class="text-sm text-slate-400">LinkedIn</div>
-              <div class="font-semibold">/in/kanishk99</div>
+              <div class="text-[10px] font-mono text-slate-500 tracking-wider uppercase">LinkedIn</div>
+              <div class="text-sm text-white mt-0.5">/in/kanishk99</div>
             </div>
           </div>
         </a>
@@ -351,21 +428,33 @@
   </section>
 
   <!-- Footer -->
-  <footer class="py-8 border-t border-white/10">
-    <div class="max-w-6xl mx-auto px-4 text-sm text-slate-500 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-      <p>© <span id="year"></span> Kanishk Sharma. All rights reserved.</p>
-      <p>Last updated: <span id="lastUpdated"></span></p>
+  <footer class="py-8 border-t border-white/[0.04]">
+    <div class="max-w-6xl mx-auto px-6 text-[11px] font-mono text-slate-600 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 tracking-wide">
+      <p>© <span id="year"></span> Kanishk Sharma</p>
+      <p>Last updated <span id="lastUpdated"></span></p>
     </div>
   </footer>
 
   <!-- Data & Script -->
   <script>
     const projects = [
-      
+      {
+        title: 'Market Data DQ Platform',
+        summary: 'Production-grade Python + SQL market data quality platform for VaR risk factors. Ingests real historical time series from ECB, FRED, Stooq, and TwelveData, runs layered DQ controls (spike detection, gap/staleness checks, cross-checks, vendor reconciliation), supports triage workflows with audit trails, and generates weekly DQ Pack reports (HTML/PDF) via GitHub Actions.',
+        tags: ['Risk', 'Data Quality', 'VaR', 'Python', 'SQL', 'Market Risk'],
+        featured: true,
+        isNew: true,
+        links: {
+          code: 'https://github.com/k9kanishk/market-data-dq-platform',
+          paper: '',
+          demo: 'https://market-data-dq-platform-jehglkbtgx4lbhuk2rbcfq.streamlit.app/'
+        }
+      },
       {
         title: 'IFRS 9 ECL Engine',
-        summary: 'Production-grade Expected Credit Loss engine implementing the IFRS 9 three-stage impairment model. Features PD/LGD/EAD modeling, multi-scenario forecasting (Base/Upside/Downside), management overlays with audit trails, DCF projections, and governance dashboards.',
-        tags: ['Risk', 'Credit Risk', 'IFRS 9', 'ECL', 'Python', 'Streamlit', 'Machine Learning', 'Governance'],
+        summary: 'Production-grade Expected Credit Loss engine implementing the IFRS 9 three-stage impairment model. Features PD/LGD/EAD modeling, multi-scenario forecasting, management overlays with audit trails, DCF projections, and governance dashboards.',
+        tags: ['Risk', 'Credit Risk', 'IFRS 9', 'ECL', 'Python', 'Streamlit', 'Machine Learning'],
+        
         links: {
           code: 'https://github.com/k9kanishk/ifrs9-ecl-engine',
           paper: '',
@@ -373,9 +462,29 @@
         }
       },
       {
+        title: 'Basel III Endgame (FRTB-SA) Risk App',
+        summary: 'Next.js app estimating pre/post-Endgame RWA using the FRTB-SA SBM engine. Multi-risk-class support, desk hot-spots, and instrument-level audit trail.',
+        tags: ['Risk', 'Market Risk', 'FRTB', 'Basel', 'RWA', 'Next.js', 'React', 'TypeScript'],
+        links: {
+          code: 'https://github.com/k9kanishk/basel-endgame-frtb',
+          paper: '',
+          demo: 'https://k9kanishk.github.io/basel-endgame-frtb/'
+        }
+      },
+      {
+        title: 'Enterprise XVA Engine',
+        summary: 'Interactive CVA/FVA/MVA/KVA demo with Greeks and scenario shocks. Monte-Carlo engine, flat-curve funding proxy, JSON import/export for portfolio analysis.',
+        tags: ['Risk', 'XVA', 'Credit Risk', 'Monte Carlo', 'Greeks', 'React', 'TypeScript'],
+        links: {
+          code: 'https://github.com/k9kanishk/xva-demo',
+          paper: '',
+          demo: 'https://k9kanishk.github.io/xva-demo/'
+        }
+      },
+      {
         title: 'ROI/NI Energy Tariff Pricing Engine',
         summary: 'All-in electricity/gas tariff builder for ROI + NI: wholesale curve inputs, shaping/losses, pass-through charge library, margin/risk adders, sanity bounds, and Streamlit tender output.',
-        tags: ['Energy', 'Pricing', 'Tariffs', 'Risk', 'Streamlit', 'Python', 'ROI', 'NI'],
+        tags: ['Energy', 'Pricing', 'Tariffs', 'Risk', 'Streamlit', 'Python'],
         links: {
           code: 'https://github.com/k9kanishk/energy-tariff-pricing-engine',
           paper: '',
@@ -385,7 +494,7 @@
       {
         title: 'Cross-Market Gas Spread & Netback Arbitrage',
         summary: 'Research dashboard analyzing TTF–NBP hub spreads and TTF–JKM LNG netbacks. Normalizes benchmarks into EUR/MWh, fits mean-reversion models, generates z-score signals, and backtests spread trades.',
-        tags: ['Energy', 'Gas', 'Spreads', 'Arbitrage', 'Time Series', 'Streamlit', 'Python', 'Mean Reversion'],
+        tags: ['Energy', 'Gas', 'Arbitrage', 'Time Series', 'Streamlit', 'Python'],
         links: {
           code: 'https://github.com/k9kanishk/gas-spread-arb/tree/main',
           paper: '',
@@ -403,29 +512,9 @@
         }
       },
       {
-        title: 'Enterprise XVA Engine',
-        summary: 'Interactive CVA/FVA/MVA/KVA demo with Greeks and scenario shocks. Monte-Carlo engine, flat-curve funding proxy, JSON import/export for portfolio analysis.',
-        tags: ['Risk', 'XVA', 'Credit Risk', 'Monte Carlo', 'Greeks', 'React', 'TypeScript'],
-        links: {
-          code: 'https://github.com/k9kanishk/xva-demo',
-          paper: '',
-          demo: 'https://k9kanishk.github.io/xva-demo/'
-        }
-      },
-      {
-        title: 'Basel III Endgame (FRTB-SA) Risk App',
-        summary: 'Next.js app that estimates pre/post-Endgame RWA using the FRTB-SA SBM engine. Multi-risk-class support, desk hot-spots, and instrument-level audit trail.',
-        tags: ['Risk', 'Market Risk', 'FRTB', 'Basel', 'RWA', 'Next.js', 'React', 'TypeScript'],
-        links: {
-          code: 'https://github.com/k9kanishk/basel-endgame-frtb',
-          paper: '',
-          demo: 'https://k9kanishk.github.io/basel-endgame-frtb/'
-        }
-      },
-      {
         title: 'Irish Day-Ahead Power Price Forecast',
         summary: 'Forecasting Irish SEMOpx day-ahead prices using lookback data, ENTSO-E fundamentals, and weather features. XGBoost model with comprehensive backtest metrics.',
-        tags: ['Energy', 'Time Series', 'Forecasting', 'XGBoost', 'Streamlit', 'Python', 'SEMOpx'],
+        tags: ['Energy', 'Time Series', 'Forecasting', 'XGBoost', 'Streamlit', 'Python'],
         links: {
           code: 'https://github.com/k9kanishk/irish-dam-forecast/tree/new2',
           paper: '',
@@ -449,32 +538,34 @@
     const search = document.getElementById('search');
 
     function getTagClass(tag) {
-      const riskTags = ['Risk', 'Credit Risk', 'Market Risk', 'XVA', 'FRTB', 'Basel', 'RWA', 'IFRS 9', 'ECL', 'Governance'];
+      const riskTags = ['Risk', 'Credit Risk', 'Market Risk', 'XVA', 'FRTB', 'Basel', 'RWA', 'IFRS 9', 'ECL', 'Governance', 'VaR'];
       const energyTags = ['Energy', 'Gas', 'Pricing', 'Tariffs', 'SEMOpx', 'ENTSO-E', 'ROI', 'NI'];
-      const quantTags = ['Quant', 'Arbitrage', 'Spreads', 'Time Series', 'Mean Reversion', 'Monte Carlo', 'Greeks', 'Forecasting'];
-      const techTags = ['Python', 'Streamlit', 'React', 'TypeScript', 'Next.js', 'Machine Learning', 'XGBoost'];
+      const quantTags = ['Quant', 'Arbitrage', 'Spreads', 'Time Series', 'Mean Reversion', 'Monte Carlo', 'Greeks', 'Forecasting', 'ETFs', 'FX'];
+      const techTags = ['Python', 'Streamlit', 'React', 'TypeScript', 'Next.js', 'Machine Learning', 'XGBoost', 'SQL', 'SQLModel'];
+      const dataTags = ['Data Quality'];
       
+      if (dataTags.includes(tag)) return 'tag-data';
       if (riskTags.includes(tag)) return 'tag-risk';
       if (energyTags.includes(tag)) return 'tag-energy';
       if (quantTags.includes(tag)) return 'tag-quant';
-      if (techTags.includes(tag)) return 'tag-python';
+      if (techTags.includes(tag)) return 'tag-tech';
       return '';
     }
 
     function pill(tag) {
       const colorClass = getTagClass(tag);
-      return `<span class="px-2.5 py-1 rounded-lg border text-xs ${colorClass || 'bg-slate-950/40 border-white/10 text-slate-300'}">${tag}</span>`;
+      return `<span class="tag ${colorClass || 'bg-white/[0.03] border-white/[0.08] text-slate-400'}">${tag}</span>`;
     }
 
-    function actionButton(label, href, primary = false) {
+    function actionButton(label, href, primary = false, icon = '') {
       const baseClass = primary 
-        ? 'bg-brand-600 hover:bg-brand-500 text-white border-brand-600' 
-        : 'bg-white/5 hover:bg-white/10 border-white/10 hover:border-white/20';
+        ? 'bg-brand-600 hover:bg-brand-500 text-white border-brand-600/50' 
+        : 'bg-white/[0.03] hover:bg-white/[0.06] border-white/[0.08] hover:border-white/[0.12] text-slate-300 hover:text-white';
       return `
-        <a class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl border ${baseClass} transition text-sm font-medium"
+        <a class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg border ${baseClass} transition-all text-xs font-medium"
            target="_blank" rel="noopener" href="${href}">
           ${label}
-          <svg class="w-3.5 h-3.5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-3 h-3 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
           </svg>
         </a>
@@ -503,35 +594,41 @@
         emptyState.classList.add('hidden');
       }
 
-      filtered.forEach(p => {
+      filtered.forEach((p, idx) => {
         const card = document.createElement('article');
-        card.className = 'project-card group p-6 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur';
+        const isFeatured = p.featured;
+        card.className = `card-glow ${isFeatured ? 'card-featured' : ''} group p-5 backdrop-blur`;
+        card.style.animationDelay = `${idx * 0.05}s`;
 
         const actions = [
           p.links.demo ? actionButton('Live Demo', p.links.demo, true) : '',
-          p.links.code ? actionButton('Code', p.links.code) : '',
+          p.links.code ? actionButton('Source', p.links.code) : '',
           p.links.paper ? actionButton('Paper', p.links.paper) : ''
         ].filter(Boolean).join('');
 
-        const featuredBadge = p.featured 
-          ? `<span class="featured-badge text-xs px-2 py-1 rounded-lg text-white font-medium">⭐ Featured</span>`
-          : `<span class="text-xs px-2 py-1 rounded-lg border border-brand-400/30 text-brand-300 bg-brand-900/20">Project</span>`;
+        const badges = [];
+        if (p.isNew) {
+          badges.push(`<span class="badge-new inline-flex items-center gap-1 text-[10px] font-mono tracking-wider uppercase px-2 py-0.5 rounded-md bg-emerald-500/15 border border-emerald-500/25 text-emerald-400">New</span>`);
+        }
+        if (isFeatured) {
+          badges.push(`<span class="inline-flex items-center gap-1 text-[10px] font-mono tracking-wider uppercase px-2 py-0.5 rounded-md bg-brand-500/10 border border-brand-500/20 text-brand-400">Featured</span>`);
+        }
 
         card.innerHTML = `
           <div class="flex items-start justify-between gap-3 mb-3">
-            <h3 class="font-semibold text-lg text-slate-100 group-hover:text-brand-300 transition">${p.title}</h3>
-            ${featuredBadge}
+            <h3 class="font-medium text-white group-hover:text-brand-300 transition leading-snug">${p.title}</h3>
+            <div class="flex gap-1.5 shrink-0">${badges.join('')}</div>
           </div>
 
-          <p class="text-sm text-slate-400 leading-relaxed mb-4">${p.summary}</p>
+          <p class="text-xs text-slate-500 leading-relaxed mb-4 line-clamp-3">${p.summary}</p>
 
-          <div class="flex flex-wrap gap-1.5 mb-5">
-            ${p.tags.slice(0, 5).map(pill).join('')}
-            ${p.tags.length > 5 ? `<span class="px-2 py-1 text-xs text-slate-500">+${p.tags.length - 5}</span>` : ''}
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            ${p.tags.slice(0, 4).map(pill).join('')}
+            ${p.tags.length > 4 ? `<span class="tag bg-white/[0.02] border-white/[0.06] text-slate-600">+${p.tags.length - 4}</span>` : ''}
           </div>
 
-          <div class="flex flex-wrap gap-2">
-            ${actions || `<span class="text-sm text-slate-500">Coming soon</span>`}
+          <div class="flex flex-wrap gap-2 pt-3 border-t border-white/[0.04]">
+            ${actions || `<span class="text-[11px] font-mono text-slate-600">Demo coming soon</span>`}
           </div>
         `;
 
@@ -544,31 +641,29 @@
     render();
 
     document.getElementById('year').textContent = new Date().getFullYear();
-    document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString(undefined, { year:'numeric', month:'short', day:'2-digit' });
+    document.getElementById('lastUpdated').textContent = new Date().toLocaleDateString('en-US', { year:'numeric', month:'short', day:'2-digit' });
 
     // GBM Chart
     function drawGBM(canvas) {
       const ctx = canvas.getContext('2d');
-      const w = canvas.width = Math.floor(canvas.clientWidth * window.devicePixelRatio);
-      const h = canvas.height = Math.floor(canvas.clientHeight * window.devicePixelRatio);
+      const dpr = window.devicePixelRatio || 1;
+      const w = canvas.width = Math.floor(canvas.clientWidth * dpr);
+      const h = canvas.height = Math.floor(canvas.clientHeight * dpr);
 
       ctx.clearRect(0, 0, w, h);
 
-      // Subtle grid
-      ctx.globalAlpha = 0.08;
+      // Subtle horizontal grid
+      ctx.globalAlpha = 0.06;
       ctx.strokeStyle = '#ffffff';
       ctx.lineWidth = 1;
-      const gridSize = Math.floor(40 * window.devicePixelRatio);
-      for (let x = 0; x < w; x += gridSize) {
-        ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
-      }
-      for (let y = 0; y < h; y += gridSize) {
+      const gridSize = Math.floor(48 * dpr);
+      for (let y = gridSize; y < h; y += gridSize) {
         ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
       }
       ctx.globalAlpha = 1;
 
       // GBM path
-      const n = 200, mu = 0.08, sigma = 0.22, dt = 1 / n;
+      const n = 250, mu = 0.08, sigma = 0.22, dt = 1 / n;
       let s = 1.0;
       const path = [s];
 
@@ -580,21 +675,22 @@
 
       const min = Math.min(...path);
       const max = Math.max(...path);
-      const padding = 16;
+      const pad = 20 * dpr;
 
       // Gradient fill
       const gradient = ctx.createLinearGradient(0, 0, 0, h);
-      gradient.addColorStop(0, 'rgba(99, 169, 251, 0.15)');
-      gradient.addColorStop(1, 'rgba(99, 169, 251, 0)');
+      gradient.addColorStop(0, 'rgba(51,128,255,0.12)');
+      gradient.addColorStop(0.5, 'rgba(51,128,255,0.04)');
+      gradient.addColorStop(1, 'rgba(51,128,255,0)');
 
       ctx.beginPath();
-      ctx.moveTo(padding, h - padding);
+      ctx.moveTo(pad, h - pad);
       path.forEach((v, i) => {
-        const x = i / (n - 1) * (w - 2 * padding) + padding;
-        const y = h - ((v - min) / (max - min + 1e-9)) * (h - 2 * padding) - padding;
+        const x = i / (n - 1) * (w - 2 * pad) + pad;
+        const y = h - ((v - min) / (max - min + 1e-9)) * (h - 2 * pad) - pad;
         ctx.lineTo(x, y);
       });
-      ctx.lineTo(w - padding, h - padding);
+      ctx.lineTo(w - pad, h - pad);
       ctx.closePath();
       ctx.fillStyle = gradient;
       ctx.fill();
@@ -602,19 +698,31 @@
       // Line
       ctx.beginPath();
       path.forEach((v, i) => {
-        const x = i / (n - 1) * (w - 2 * padding) + padding;
-        const y = h - ((v - min) / (max - min + 1e-9)) * (h - 2 * padding) - padding;
+        const x = i / (n - 1) * (w - 2 * pad) + pad;
+        const y = h - ((v - min) / (max - min + 1e-9)) * (h - 2 * pad) - pad;
         i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
       });
 
-      ctx.lineWidth = Math.max(2, Math.floor(2.5 * window.devicePixelRatio));
+      ctx.lineWidth = Math.max(1.5, 2 * dpr);
       ctx.lineJoin = 'round';
       ctx.lineCap = 'round';
-      ctx.strokeStyle = '#63a9fb';
-      ctx.shadowColor = 'rgba(99,169,251,0.4)';
-      ctx.shadowBlur = 8;
+      ctx.strokeStyle = '#3380ff';
+      ctx.shadowColor = 'rgba(51,128,255,0.35)';
+      ctx.shadowBlur = 10 * dpr;
       ctx.stroke();
       ctx.shadowBlur = 0;
+
+      // End dot
+      const lastX = w - pad;
+      const lastY = h - ((path[n-1] - min) / (max - min + 1e-9)) * (h - 2 * pad) - pad;
+      ctx.beginPath();
+      ctx.arc(lastX, lastY, 3 * dpr, 0, Math.PI * 2);
+      ctx.fillStyle = '#3380ff';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(lastX, lastY, 6 * dpr, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(51,128,255,0.2)';
+      ctx.fill();
     }
 
     const canvas = document.getElementById('spark');
@@ -622,16 +730,25 @@
     window.addEventListener('resize', resize);
     resize();
 
-    // Smooth scroll for anchor links
+    // Smooth scroll
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
