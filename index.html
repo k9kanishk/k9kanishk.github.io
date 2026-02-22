@@ -655,21 +655,24 @@
         }
 
         card.innerHTML = `
-          <div class="flex items-start justify-between gap-3 mb-3">
-            <h3 class="font-medium text-white group-hover:text-brand-300 transition leading-snug">${p.title}</h3>
-            <div class="flex gap-1.5 shrink-0">${badges.join('')}</div>
-          </div>
+           <div class="flex items-start justify-between gap-3 mb-3">
+    <h3 class="font-medium text-white group-hover:text-brand-300 transition leading-snug">${p.title}</h3>
+    <div class="flex gap-1.5 shrink-0">${badges.join('')}</div>
+  </div>
 
-          <p class="text-xs text-slate-500 leading-relaxed mb-4">${p.summary}</p>
+  <div class="summary-container">
+    <p class="text-xs text-slate-500 leading-relaxed mb-4 summary-text line-clamp-3">${p.summary}</p>
+    <button class="read-more-btn text-[10px] font-mono text-brand-400 hover:text-brand-300 transition mb-3" onclick="this.previousElementSibling.classList.toggle('line-clamp-3'); this.textContent = this.previousElementSibling.classList.contains('line-clamp-3') ? 'Read more →' : '← Read less'">Read more →</button>
+  </div>
 
-          <div class="flex flex-wrap gap-1.5 mb-4">
-            ${p.tags.slice(0, 4).map(pill).join('')}
-            ${p.tags.length > 4 ? `<span class="tag bg-white/[0.02] border-white/[0.06] text-slate-600">+${p.tags.length - 4}</span>` : ''}
-          </div>
+  <div class="flex flex-wrap gap-1.5 mb-4">
+    ${p.tags.slice(0, 4).map(pill).join('')}
+    ${p.tags.length > 4 ? `<span class="tag bg-white/[0.02] border-white/[0.06] text-slate-600">+${p.tags.length - 4}</span>` : ''}
+  </div>
 
-          <div class="flex flex-wrap gap-2 pt-3 border-t border-white/[0.04]">
-            ${actions || `<span class="text-[11px] font-mono text-slate-600">Demo coming soon</span>`}
-          </div>
+  <div class="flex flex-wrap gap-2 pt-3 border-t border-white/[0.04]">
+    ${actions || `<span class="text-[11px] font-mono text-slate-600">Demo coming soon</span>`}
+  </div>
         `;
 
         grid.appendChild(card);
