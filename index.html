@@ -165,6 +165,7 @@
     .tag-quant { background: rgba(168,85,247,0.08); border-color: rgba(168,85,247,0.2); color: #c084fc; }
     .tag-tech { background: rgba(59,130,246,0.08); border-color: rgba(59,130,246,0.2); color: #60a5fa; }
     .tag-data { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.2); color: #fbbf24; }
+    .tag-structured { background: rgba(236,72,153,0.08); border-color: rgba(236,72,153,0.2); color: #f472b6; }
 
     /* Divider line */
     .accent-line {
@@ -200,6 +201,14 @@
     }
     .badge-new {
       animation: newPulse 2s ease-in-out infinite;
+    }
+
+    /* Line clamp utility */
+    .line-clamp-3 {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
   </style>
 </head>
@@ -239,7 +248,7 @@
 
         <p class="animate-fade-in-delay-2 mt-6 text-lg text-slate-400 leading-relaxed max-w-md">
           I'm <span class="text-white font-medium">Kanishk Sharma</span> —
-          I build risk engines, pricing models, and research dashboards.
+          I build risk engines, pricing models, structured finance tools, and research dashboards.
         </p>
 
         <div class="animate-slide-up mt-10 flex flex-wrap gap-3">
@@ -293,11 +302,11 @@
     <div class="max-w-6xl mx-auto px-6 py-10">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
         <div class="text-center">
-          <div class="text-3xl font-light text-white" id="projectCount">8</div>
+          <div class="text-3xl font-light text-white" id="projectCount">9</div>
           <div class="text-xs font-mono text-slate-500 mt-1.5 tracking-wider uppercase">Projects</div>
         </div>
         <div class="text-center">
-          <div class="text-3xl font-light text-white">5+</div>
+          <div class="text-3xl font-light text-white">6+</div>
           <div class="text-xs font-mono text-slate-500 mt-1.5 tracking-wider uppercase">Risk Models</div>
         </div>
         <div class="text-center">
@@ -321,7 +330,7 @@
           <h2 class="text-3xl md:text-4xl font-light text-white tracking-tight">
             Featured <span class="font-serif italic text-brand-400">Projects</span>
           </h2>
-          <p class="mt-3 text-slate-500 text-sm max-w-md">Production-ready risk engines, research dashboards, and quantitative analytics tools.</p>
+          <p class="mt-3 text-slate-500 text-sm max-w-md">Production-ready risk engines, structured finance tools, research dashboards, and quantitative analytics.</p>
         </div>
 
         <div class="flex flex-col sm:flex-row gap-2.5 reveal">
@@ -367,19 +376,37 @@
         </div>
         
         <div class="reveal card-glow p-6 backdrop-blur">
+          <div class="w-9 h-9 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center mb-4">
+            <svg class="w-4 h-4 text-pink-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+          </div>
+          <h3 class="font-medium text-white">Structured Finance</h3>
+          <p class="text-xs text-slate-500 mt-3 leading-relaxed font-mono">Asset Securitisation · CLO/RMBS · Waterfall Modeling · Cash Flow Engines · Tranche Analysis · Credit Enhancement</p>
+        </div>
+        
+        <div class="reveal card-glow p-6 backdrop-blur">
           <div class="w-9 h-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mb-4">
             <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
           </div>
           <h3 class="font-medium text-white">Energy & Commodities</h3>
           <p class="text-xs text-slate-500 mt-3 leading-relaxed font-mono">Power Pricing · Gas Spreads · LNG Netbacks · Tariff Engines · ENTSO-E · SEMOpx</p>
         </div>
-        
+      </div>
+
+      <div class="mt-4 grid md:grid-cols-2 gap-4">
+        <div class="reveal card-glow p-6 backdrop-blur">
+          <div class="w-9 h-9 rounded-lg bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-4">
+            <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+          </div>
+          <h3 class="font-medium text-white">Quantitative Methods</h3>
+          <p class="text-xs text-slate-500 mt-3 leading-relaxed font-mono">Monte Carlo · Time Series Analysis · Mean Reversion · Arbitrage Strategies · Portfolio Optimization · Derivatives Pricing</p>
+        </div>
+
         <div class="reveal card-glow p-6 backdrop-blur">
           <div class="w-9 h-9 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-4">
             <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
           </div>
           <h3 class="font-medium text-white">Tech Stack</h3>
-          <p class="text-xs text-slate-500 mt-3 leading-relaxed font-mono">Python · NumPy · Pandas · Scikit-learn · Streamlit · React · TypeScript · Next.js · SQL · SQLModel</p>
+          <p class="text-xs text-slate-500 mt-3 leading-relaxed font-mono">Python · NumPy · Pandas · Scikit-learn · Streamlit · React · TypeScript · Next.js · SQL · SQLModel · XGBoost</p>
         </div>
       </div>
     </div>
@@ -394,7 +421,7 @@
           Get in <span class="font-serif italic text-brand-400">Touch</span>
         </h2>
         <p class="mt-3 text-slate-500 text-sm max-w-lg">
-          Open to internships and full-time roles in quantitative finance, market risk, credit risk, and energy analytics.
+          Open to internships and full-time roles in quantitative finance, market risk, credit risk, structured finance, and energy analytics.
         </p>
       </div>
 
@@ -439,10 +466,22 @@
   <script>
     const projects = [
       {
+        title: 'Asset Securitisation Engine',
+        summary: 'Production-grade Securitisation Waterfall + IPD Reporting Engine built on real ABS data from SEC EDGAR. The app pulls the latest 10-D and Exhibit 99.1 (BMW Vehicle Owner Trust), parses deal cashflows, fees, tranche balances, reserve movements, and runs separate interest/principal waterfalls to generate a full IPD pack (Available Funds, Priority of Payments, Note Rollforward, Investor Summary). Includes an audit-grade Reconciliation sheet that matches trustee/servicer reporting to the cent at tranche and deal totals, with downloadable Excel outputs and a deployable web UI.',
+        tags: ['Structured Finance', 'Securitisation', 'Monte Carlo', 'Risk', 'Python', 'Cash Flow Modeling'],
+        
+      
+        links: {
+          code: 'https://github.com/k9kanishk/securitisation_engine',
+          paper: '',
+          demo: 'https://securitisationengine-cmoppc37ucjrrfhatryheb.streamlit.app/'
+        }
+      },
+      {
         title: 'Market Data DQ Platform',
         summary: 'Production-grade Python + SQL market data quality platform for VaR risk factors. Ingests real historical time series from ECB, FRED, Stooq, and TwelveData, runs layered DQ controls (spike detection, gap/staleness checks, cross-checks, vendor reconciliation), supports triage workflows with audit trails, and generates weekly DQ Pack reports (HTML/PDF) via GitHub Actions.',
         tags: ['Risk', 'Data Quality', 'VaR', 'Python', 'SQL', 'Market Risk'],
-        
+      
         links: {
           code: 'https://github.com/k9kanishk/market-data-dq-platform',
           paper: '',
@@ -453,7 +492,7 @@
         title: 'IFRS 9 ECL Engine',
         summary: 'Production-grade Expected Credit Loss engine implementing the IFRS 9 three-stage impairment model. Features PD/LGD/EAD modeling, multi-scenario forecasting, management overlays with audit trails, DCF projections, and governance dashboards.',
         tags: ['Risk', 'Credit Risk', 'IFRS 9', 'ECL', 'Python', 'Streamlit', 'Machine Learning'],
-        
+       
         links: {
           code: 'https://github.com/k9kanishk/ifrs9-ecl-engine',
           paper: '',
@@ -542,7 +581,9 @@
       const quantTags = ['Quant', 'Arbitrage', 'Spreads', 'Time Series', 'Mean Reversion', 'Monte Carlo', 'Greeks', 'Forecasting', 'ETFs', 'FX'];
       const techTags = ['Python', 'Streamlit', 'React', 'TypeScript', 'Next.js', 'Machine Learning', 'XGBoost', 'SQL', 'SQLModel'];
       const dataTags = ['Data Quality'];
+      const structuredTags = ['Structured Finance', 'Securitisation', 'Cash Flow Modeling', 'CLO', 'RMBS'];
       
+      if (structuredTags.includes(tag)) return 'tag-structured';
       if (dataTags.includes(tag)) return 'tag-data';
       if (riskTags.includes(tag)) return 'tag-risk';
       if (energyTags.includes(tag)) return 'tag-energy';
