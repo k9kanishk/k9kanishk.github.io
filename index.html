@@ -466,6 +466,17 @@
   <script>
     const projects = [
       {
+    title: 'IRB Credit Model Validation Toolkit (PD/LGD/EAD-CCF)',
+    summary: 'SAS-first IRB model validation toolkit covering PD discrimination (AUC/Gini), calibration (decile analysis), stability (PSI), override impact analysis, LGD accuracy with downturn stress testing (recovery haircut scenarios), and EAD/CCF backtesting. Generates automated RAG-rated findings log aligned to CRR Articles 179/181/182 and EBA GL/2017/16, with 7 Excel report outputs and an interactive Dash dashboard for results visualization.',
+    tags: ['Credit Risk', 'IRB', 'Model Validation', 'SAS', 'Python', 'Dash', 'EBA/CRR'],
+    links: {
+        code: 'https://github.com/k9kanishk/irb_validation_toolkit',
+        paper: '',
+        demo: 'https://irb-validation-toolkit.onrender.com/'
+    }
+},
+
+      {
         title: 'Asset Securitisation Engine',
         summary: 'Production-grade Securitisation Waterfall + IPD Reporting Engine built on real ABS data from SEC EDGAR. The app pulls the latest 10-D and Exhibit 99.1 (BMW Vehicle Owner Trust), parses deal cashflows, fees, tranche balances, reserve movements, and runs separate interest/principal waterfalls to generate a full IPD pack (Available Funds, Priority of Payments, Note Rollforward, Investor Summary). Includes an audit-grade Reconciliation sheet that matches trustee/servicer reporting to the cent at tranche and deal totals, with downloadable Excel outputs and a deployable web UI.',
         tags: ['Structured Finance', 'Securitisation', 'Monte Carlo', 'Risk', 'Python', 'Cash Flow Modeling'],
